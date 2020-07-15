@@ -94,6 +94,7 @@ namespace CurrencyApp
 				option.EnableEndpointRouting = false;
 			});
 
+			ConfigureAutomapper(services);
 			ConfigureCustomServices(services);
 		}
 

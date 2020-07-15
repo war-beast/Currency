@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyApp.BLL", "Currency.BLL\CurrencyApp.BLL.csproj", "{81AF1C30-1653-4B28-BDF3-BCB6FD64FBC0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyApp", "Currency\CurrencyApp.csproj", "{E2E7CEE6-7400-4D40-B658-997AC8747DAB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{81AF1C30-1653-4B28-BDF3-BCB6FD64FBC0} = {81AF1C30-1653-4B28-BDF3-BCB6FD64FBC0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
