@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Currency.DAL.DataContext
+namespace CurrencyApp.DAL.DataContext
 {
 	public class IdentityContext : IdentityDbContext
 	{

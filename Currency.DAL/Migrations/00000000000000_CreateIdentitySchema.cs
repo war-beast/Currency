@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Currency.DAL.Migrations
+namespace CurrencyApp.DAL.Migrations
 {
 	public partial class CreateIdentitySchema : Migration
 	{

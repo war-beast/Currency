@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using CurrencyApp.Areas.Identity;
+using Microsoft.AspNetCore.Hosting;
 
-[assembly: HostingStartup(typeof(Currency.Areas.Identity.IdentityHostingStartup))]
-namespace Currency.Areas.Identity
+[assembly: HostingStartup(typeof(IdentityHostingStartup))]
+namespace CurrencyApp.Areas.Identity
 {
 	public class IdentityHostingStartup : IHostingStartup
     {

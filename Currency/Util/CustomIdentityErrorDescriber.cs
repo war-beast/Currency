@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Currency.Util
+namespace CurrencyApp.Util
 {
 	public class CustomIdentityErrorDescriber : IdentityErrorDescriber
 	{

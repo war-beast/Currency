@@ -1,6 +1,5 @@
-using Currency.DAL.DataContext;
-using Currency.Util;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using CurrencyApp.DAL.DataContext;
+using CurrencyApp.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Currency
+namespace CurrencyApp
 {
 	public class Startup
 	{

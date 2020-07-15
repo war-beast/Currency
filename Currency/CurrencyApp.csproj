@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Currency.DAL\Currency.DAL.csproj" />
+    <ProjectReference Include="..\Currency.DAL\CurrencyApp.DAL.csproj" />
   </ItemGroup>
 
 </Project>

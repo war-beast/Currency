@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.DAL", "Currency.DAL\Currency.DAL.csproj", "{3E056541-6F95-4DE8-96EE-3F54D113561C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyApp.DAL", "Currency.DAL\CurrencyApp.DAL.csproj", "{3E056541-6F95-4DE8-96EE-3F54D113561C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency.BLL", "Currency.BLL\Currency.BLL.csproj", "{81AF1C30-1653-4B28-BDF3-BCB6FD64FBC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyApp.BLL", "Currency.BLL\CurrencyApp.BLL.csproj", "{81AF1C30-1653-4B28-BDF3-BCB6FD64FBC0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Currency", "Currency\Currency.csproj", "{E2E7CEE6-7400-4D40-B658-997AC8747DAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyApp", "Currency\CurrencyApp.csproj", "{E2E7CEE6-7400-4D40-B658-997AC8747DAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

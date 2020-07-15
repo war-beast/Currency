@@ -1,10 +1,10 @@
-﻿using Currency.Models;
+﻿using System.Diagnostics;
+using CurrencyApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 
-namespace Currency.Controllers
+namespace CurrencyApp.Controllers
 {
 	public class HomeController : Controller
 	{

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 
-namespace Currency.Areas.Identity.Pages.Account
+namespace CurrencyApp.Areas.Identity.Pages.Account
 {
 	[AllowAnonymous]
     public class LogoutModel : PageModel
