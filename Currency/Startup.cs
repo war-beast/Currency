@@ -1,3 +1,4 @@
+using AutoMapper;
 using CurrencyApp.DAL.DataContext;
 using CurrencyApp.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,8 +30,8 @@ namespace CurrencyApp
 			services.AddDbContext<IdentityContext>(options =>
 				options.UseSqlServer(connectionString));
 
-			//services.AddDbContext<ApplicationContext>(options =>
-			//	options.UseSqlServer(connectionString));
+			services.AddDbContext<ApplicationContext>(options =>
+				options.UseSqlServer(connectionString));
 
 			// добавление сервисов Idenity
 			services.AddDefaultIdentity<IdentityUser>(options =>
@@ -93,6 +94,8 @@ namespace CurrencyApp
 			{
 				option.EnableEndpointRouting = false;
 			});
+			services.AddHttpClient();
+			services.AddAutoMapper(typeof(Startup));
 
 			ConfigureAutomapper(services);
 			ConfigureCustomServices(services);

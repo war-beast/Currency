@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CurrencyApp.DAL.DataContext;
+﻿using CurrencyApp.DAL.DataContext;
 using CurrencyApp.DAL.Entity;
 using CurrencyApp.DAL.Interface;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace CurrencyApp.DAL.Repositories
 {
@@ -29,9 +28,9 @@ namespace CurrencyApp.DAL.Repositories
 
 		public IRepository<Currency> CurrencyRepository => _currencyRepository ??= new CurrencyRepository(_db);
 
-		public void Save()
+		public async Task Save()
 		{
-			throw new NotImplementedException();
+			await _db.SaveChangesAsync();
 		}
 
 		public virtual void Dispose(bool disposing)

@@ -1,4 +1,5 @@
-﻿using CurrencyApp.DAL.Entity;
+﻿using System.Threading.Tasks;
+using CurrencyApp.DAL.Entity;
 
 namespace CurrencyApp.DAL.Interface
 {
@@ -6,6 +7,6 @@ namespace CurrencyApp.DAL.Interface
 	{
 		IRepository<Currency> CurrencyRepository { get; }
 
-		void Save();
+		Task Save();
 	}
 }

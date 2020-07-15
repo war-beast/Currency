@@ -54,6 +54,8 @@ namespace CurrencyApp.BLL.Services
 				else
 					_unitOfWork.CurrencyRepository.Update(_mapper.Map<Currency>(currency));
 			}
+
+			await _unitOfWork.Save();
 		}
 			
 	}

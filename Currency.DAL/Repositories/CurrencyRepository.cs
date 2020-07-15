@@ -42,6 +42,8 @@ namespace CurrencyApp.DAL.Repositories
 				throw new ArgumentNullException(nameof(item));
 
 			#endregion
+
+			_db.Currencies.Add(item);
 		}
 
 		public void Update(Currency item)
