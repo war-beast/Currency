@@ -1,4 +1,6 @@
-﻿using CurrencyApp.DAL.Interface;
+﻿using CurrencyApp.BLL.Interfaces;
+using CurrencyApp.BLL.Services;
+using CurrencyApp.DAL.Interface;
 using CurrencyApp.DAL.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,13 +18,14 @@ namespace CurrencyApp
 
 			#region businesslogic level
 
-			
+			services.AddTransient<ICbrCurrencyParsingService, CbrCurrencyParsingService>();
+			services.AddTransient<ICbrCurrencyService, CbrCurrencyService>();
 
 			#endregion
 
 			#region presentation layer
 
-			
+
 
 			#endregion
 		}

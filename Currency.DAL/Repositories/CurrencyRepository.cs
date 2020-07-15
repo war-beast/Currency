@@ -54,7 +54,7 @@ namespace CurrencyApp.DAL.Repositories
 			#endregion
 
 			var local = _db.Currencies
-				.First(x => x.Id == item.Id);
+				.First(x => x.Id.Equals(item.Id));
 
 			_db.Entry(local).CurrentValues.SetValues(item);
 		}
