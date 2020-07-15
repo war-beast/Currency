@@ -12,7 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CurrencyApp
 {
-	public class Startup
+	public partial class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
@@ -93,6 +93,8 @@ namespace CurrencyApp
 			{
 				option.EnableEndpointRouting = false;
 			});
+
+			ConfigureCustomServices(services);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
