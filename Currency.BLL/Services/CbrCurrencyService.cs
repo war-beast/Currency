@@ -32,12 +32,12 @@ namespace CurrencyApp.BLL.Services
 
 		#endregion
 
-		public IEnumerable<CurrencyDto> GetCurrencies()
-		{
-			var currencies = _mapper.Map<IEnumerable<CurrencyDto>>(_unitOfWork.CurrencyRepository.GetAll());
+		public async Task<CurrencyDto> Get(string id) => 
+			await Task.Run(() => _mapper.Map<CurrencyDto>(_unitOfWork.CurrencyRepository.Get(id)));
 
-			return currencies;
-		}
+		public async Task<IEnumerable<CurrencyDto>> GetCurrencies() => 
+			await Task.Run(() => _mapper.Map<IEnumerable<CurrencyDto>>(_unitOfWork.CurrencyRepository.GetAll()));
+
 
 		public async Task CreateOrUpdate()
 		{
@@ -55,5 +55,6 @@ namespace CurrencyApp.BLL.Services
 					_unitOfWork.CurrencyRepository.Update(_mapper.Map<Currency>(currency));
 			}
 		}
+			
 	}
 }

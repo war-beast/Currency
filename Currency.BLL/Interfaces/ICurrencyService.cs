@@ -6,7 +6,9 @@ namespace CurrencyApp.BLL.Interfaces
 {
 	public interface ICurrencyService
 	{
-		IEnumerable<CurrencyDto> GetCurrencies();
+		Task<CurrencyDto> Get(string id);
+
+		Task<IEnumerable<CurrencyDto>> GetCurrencies();
 
 		Task CreateOrUpdate();
 	}
