@@ -12,6 +12,8 @@ namespace CurrencyApp.DAL.Interface
 
 		void Create(T item);
 
+		void Update(T item);
+
 		void Delete(string id);
 	}
 }
