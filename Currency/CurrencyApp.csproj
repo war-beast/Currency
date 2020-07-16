@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Src\components\currenciesTable\currenciesTable.ts" />
+    <None Remove="Src\components\currenciesTable\currenciesTableRow.ts" />
+    <None Remove="Src\models\currency.ts" />
+    <None Remove="Src\pages\main\init.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.6" />
@@ -22,6 +29,18 @@
   <ItemGroup>
     <ProjectReference Include="..\Currency.BLL\CurrencyApp.BLL.csproj" />
     <ProjectReference Include="..\Currency.DAL\CurrencyApp.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Src\util\" />
+    <Folder Include="wwwroot\bundle\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTable.ts" />
+    <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTableRow.ts" />
+    <TypeScriptCompile Include="Src\models\currency.ts" />
+    <TypeScriptCompile Include="Src\pages\main\init.ts" />
   </ItemGroup>
 
 </Project>

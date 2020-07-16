@@ -1,8 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Курсы валют";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Тестовое приложение "Курсы валют"</h1>
+	<div id="vue-app-container"></div>
 </div>
+
+@section Scripts
+{
+	<script src="~/bundle/mainPage.bundle.js"></script>
+}
