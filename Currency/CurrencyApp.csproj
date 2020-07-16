@@ -3,13 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-Currency-C9406F79-741F-407C-8793-6C57A03F2651</UserSecretsId>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Src\components\currenciesTable\currenciesTable.ts" />
     <None Remove="Src\components\currenciesTable\currenciesTableRow.ts" />
+    <None Remove="Src\exceptions\invalidArgumentException.ts" />
+    <None Remove="Src\exceptions\requestException.ts" />
+    <None Remove="Src\models\apiResult.ts" />
     <None Remove="Src\models\currency.ts" />
     <None Remove="Src\pages\main\init.ts" />
+    <None Remove="Src\util\request.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,15 +37,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Src\util\" />
     <Folder Include="wwwroot\bundle\" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTable.ts" />
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTableRow.ts" />
+    <TypeScriptCompile Include="Src\exceptions\invalidArgumentException.ts" />
+    <TypeScriptCompile Include="Src\exceptions\requestException.ts" />
+    <TypeScriptCompile Include="Src\models\apiResult.ts" />
     <TypeScriptCompile Include="Src\models\currency.ts" />
     <TypeScriptCompile Include="Src\pages\main\init.ts" />
+    <TypeScriptCompile Include="Src\util\request.ts" />
   </ItemGroup>
 
 </Project>

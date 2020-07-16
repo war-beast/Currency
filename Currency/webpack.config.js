@@ -48,15 +48,16 @@ let configuration = {
 		new CleanWebpackPlugin([bundleFolder])
 	],
 	resolve: {
-		extensions: [".js", ".vue", ".tsx", ".ts", ".json"],
+		extensions: [".ts", ".js", ".vue", ".tsx", ".json"],
 		alias: {
 			vue$: "vue/dist/vue.esm.js",
 			Vue$: "vue/dist/vue.esm.js",
 
 			Main: path.resolve(__dirname, "./Src/pages/main/"),
 			Components: path.resolve(__dirname, "./Src/components/"),
-			Util: path.resolve(__dirname, "./Src/util/"),
-			Models: path.resolve(__dirname, "./Src/models/") //Такие пути к файлам .ts не распознаются компилятором!
+			Models: path.resolve(__dirname, "./Src/models/"),
+			Exceptions: path.resolve(__dirname, "./Src/exceptions/"),
+			Util: path.resolve(__dirname, "./Src/util/")
 		}
 	},
 	module: {

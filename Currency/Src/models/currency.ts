@@ -1,7 +1,7 @@
 ﻿export class Currency {
-	public id: string;
-	public name: string;
-	public rate: number;
+	readonly id: string;
+	readonly name: string;
+	readonly rate: number;
 
 	constructor(id: string, name: string, rate: number) {
 		this.id = id;
