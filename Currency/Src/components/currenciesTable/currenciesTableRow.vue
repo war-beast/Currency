@@ -1,5 +1,5 @@
 ﻿<template>
-	<tr>
+	<tr v-on:click="showDetails(currency.id)">
 		<td>{{currency.id}}</td>
 		<td>{{currency.name}}</td>
 		<td>{{currency.rate}}</td>

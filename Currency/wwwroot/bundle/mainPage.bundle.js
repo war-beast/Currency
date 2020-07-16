@@ -3837,26 +3837,45 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 const currenciesListUrl = "/api/common/currencies";
 const currenciesTotalCountUrl = "/api/common/currencyCount";
+const currencyDetails = "/api/common/currency";
 let CurrenciesTable = class CurrenciesTable extends vue__WEBPACK_IMPORTED_MODULE_0__["default"] {
     constructor() {
         super();
         this.currencies = [];
+        this.selectedCurrency = null;
         this.totalCount = 0;
         this.pageCount = 0;
         this.visibleRowCount = 5;
         this.page = 1;
+        this.isInfoVisible = false;
         this.loadCount();
         this.loadData(this.page, this.visibleRowCount);
     }
     showPrevious() {
-        if (this.page > 1) {
+        if (this.page > 1)
             this.loadData(--this.page, this.visibleRowCount);
-        }
     }
     showNext() {
-        if (this.page < this.pageCount) {
+        if (this.page < this.pageCount)
             this.loadData(++this.page, this.visibleRowCount);
-        }
+    }
+    showDetails(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let apiRequest = new Util_request__WEBPACK_IMPORTED_MODULE_3__["default"]();
+            yield apiRequest.getData(`${currencyDetails}?id=${id}`)
+                .then((result) => {
+                if (result.success) {
+                    this.selectedCurrency = JSON.parse(result.value);
+                    this.isInfoVisible = true;
+                }
+                else {
+                    console.log(`Ошибка загрузки данных по url: ${currencyDetails}`);
+                }
+            });
+        });
+    }
+    hideInfoModal() {
+        this.isInfoVisible = false;
     }
     loadData(page, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -3928,6 +3947,9 @@ let RowComponent = class RowComponent extends vue__WEBPACK_IMPORTED_MODULE_0__["
 __decorate([
     Object(vue_property_decorator__WEBPACK_IMPORTED_MODULE_2__["Prop"])()
 ], RowComponent.prototype, "currency", void 0);
+__decorate([
+    Object(vue_property_decorator__WEBPACK_IMPORTED_MODULE_2__["Prop"])()
+], RowComponent.prototype, "showDetails", void 0);
 RowComponent = __decorate([
     vue_class_component__WEBPACK_IMPORTED_MODULE_1___default.a
 ], RowComponent);
@@ -4156,13 +4178,138 @@ var render = function() {
           _vm._l(_vm.currencies, function(item, index) {
             return _c("currencyRow", {
               key: "item__" + index,
-              attrs: { currency: item }
+              attrs: {
+                currency: item,
+                showDetails: function(id) {
+                  return _vm.showDetails(id)
+                }
+              }
             })
           }),
           1
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { show: _vm.isInfoVisible },
+        attrs: {
+          id: "exampleModalLong",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLongTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalLongTitle" }
+                  },
+                  [_vm._v("Информация о выбранной валюте")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" },
+                    on: { click: _vm.hideInfoModal }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "container" }, [
+                  _vm.selectedCurrency != null
+                    ? _c(
+                        "div",
+                        { staticClass: "row my-4 flex-column text-left" },
+                        [
+                          _c("h4", { staticClass: "h4" }, [_vm._v("Выбрано:")]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-form-label font-weight-bold",
+                                attrs: { for: "nameCaption" }
+                              },
+                              [_vm._v("Id:")]
+                            ),
+                            _vm._v(" "),
+                            _c("span", { attrs: { id: "nameCaption" } }, [
+                              _vm._v(_vm._s(_vm.selectedCurrency.id))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-form-label font-weight-bold",
+                                attrs: { for: "nameCaption" }
+                              },
+                              [_vm._v("Наименование:")]
+                            ),
+                            _vm._v(" "),
+                            _c("span", { attrs: { id: "nameCaption" } }, [
+                              _vm._v(_vm._s(_vm.selectedCurrency.name))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-form-label font-weight-bold",
+                                attrs: { for: "nameCaption" }
+                              },
+                              [_vm._v("Курс (руб. за ед.):")]
+                            ),
+                            _vm._v(" "),
+                            _c("span", { attrs: { id: "nameCaption" } }, [
+                              _vm._v(_vm._s(_vm.selectedCurrency.rate))
+                            ])
+                          ])
+                        ]
+                      )
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.hideInfoModal }
+                  },
+                  [_vm._v("Закрыть")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -4202,13 +4349,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("tr", [
-    _c("td", [_vm._v(_vm._s(_vm.currency.id))]),
-    _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.currency.name))]),
-    _vm._v(" "),
-    _c("td", [_vm._v(_vm._s(_vm.currency.rate))])
-  ])
+  return _c(
+    "tr",
+    {
+      on: {
+        click: function($event) {
+          return _vm.showDetails(_vm.currency.id)
+        }
+      }
+    },
+    [
+      _c("td", [_vm._v(_vm._s(_vm.currency.id))]),
+      _vm._v(" "),
+      _c("td", [_vm._v(_vm._s(_vm.currency.name))]),
+      _vm._v(" "),
+      _c("td", [_vm._v(_vm._s(_vm.currency.rate))])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -115,6 +115,7 @@ namespace CurrencyApp
 				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
+			app.UseResponseCaching();
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
@@ -125,6 +126,11 @@ namespace CurrencyApp
 
 			app.UseMvc(routes =>
 			{
+				routes.MapRoute(
+					name: "apiCommon",
+					template: "api/common/currency/{id?}",
+					defaults: new { controller = "Api", action = "Index" });
+
 				routes.MapRoute(
 					name: "default",
 					template: "{controller=Home}/{action=Index}/{id?}");

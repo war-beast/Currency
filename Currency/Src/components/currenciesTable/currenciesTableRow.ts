@@ -7,4 +7,6 @@ import { Currency } from "Models/currency";
 export default class RowComponent extends Vue {
 	@Prop()
 	private currency: Currency;
+	@Prop()
+	private showDetails: Function;
 }

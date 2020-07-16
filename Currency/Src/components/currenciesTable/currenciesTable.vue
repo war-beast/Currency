@@ -21,10 +21,47 @@
 				</thead>
 				<tbody>
 					<currencyRow v-for="(item, index) in currencies"
-									 v-bind:currency="item"
-									 v-bind:key="`item__${index}`"/>
+								 v-bind:currency="item"
+								 v-bind:key="`item__${index}`"
+								 v-bind:showDetails="(id) => showDetails(id)" />
 				</tbody>
 			</table>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" v-bind:class="{ show: isInfoVisible }" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Информация о выбранной валюте</h5>
+						<button type="button" class="close" aria-label="Close" v-on:click="hideInfoModal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="container">
+							<div class="row my-4 flex-column text-left" v-if="selectedCurrency != null">
+								<h4 class="h4">Выбрано:</h4>
+								<div>
+									<label for="nameCaption" class="col-form-label font-weight-bold">Id:</label>
+									<span id="nameCaption">{{selectedCurrency.id}}</span>
+								</div>
+								<div>
+									<label for="nameCaption" class="col-form-label font-weight-bold">Наименование:</label>
+									<span id="nameCaption">{{selectedCurrency.name}}</span>
+								</div>
+								<div>
+									<label for="nameCaption" class="col-form-label font-weight-bold">Курс (руб. за ед.):</label>
+									<span id="nameCaption">{{selectedCurrency.rate}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" v-on:click="hideInfoModal">Закрыть</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>

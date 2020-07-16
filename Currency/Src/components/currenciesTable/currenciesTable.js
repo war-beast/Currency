@@ -19,26 +19,45 @@ import RowComponent from "Components/currenciesTable/currenciesTableRow.vue";
 import ApiRequest from "Util/request";
 const currenciesListUrl = "/api/common/currencies";
 const currenciesTotalCountUrl = "/api/common/currencyCount";
+const currencyDetails = "/api/common/currency";
 let CurrenciesTable = class CurrenciesTable extends Vue {
     constructor() {
         super();
         this.currencies = [];
+        this.selectedCurrency = null;
         this.totalCount = 0;
         this.pageCount = 0;
         this.visibleRowCount = 5;
         this.page = 1;
+        this.isInfoVisible = false;
         this.loadCount();
         this.loadData(this.page, this.visibleRowCount);
     }
     showPrevious() {
-        if (this.page > 1) {
+        if (this.page > 1)
             this.loadData(--this.page, this.visibleRowCount);
-        }
     }
     showNext() {
-        if (this.page < this.pageCount) {
+        if (this.page < this.pageCount)
             this.loadData(++this.page, this.visibleRowCount);
-        }
+    }
+    showDetails(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let apiRequest = new ApiRequest();
+            yield apiRequest.getData(`${currencyDetails}?id=${id}`)
+                .then((result) => {
+                if (result.success) {
+                    this.selectedCurrency = JSON.parse(result.value);
+                    this.isInfoVisible = true;
+                }
+                else {
+                    console.log(`Ошибка загрузки данных по url: ${currencyDetails}`);
+                }
+            });
+        });
+    }
+    hideInfoModal() {
+        this.isInfoVisible = false;
     }
     loadData(page, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {

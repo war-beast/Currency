@@ -12,6 +12,9 @@ let RowComponent = class RowComponent extends Vue {
 __decorate([
     Prop()
 ], RowComponent.prototype, "currency", void 0);
+__decorate([
+    Prop()
+], RowComponent.prototype, "showDetails", void 0);
 RowComponent = __decorate([
     Component
 ], RowComponent);
