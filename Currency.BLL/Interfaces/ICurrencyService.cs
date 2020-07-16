@@ -8,7 +8,9 @@ namespace CurrencyApp.BLL.Interfaces
 	{
 		Task<CurrencyDto> Get(string id);
 
-		Task<IEnumerable<CurrencyDto>> GetCurrencies();
+		Task<IEnumerable<CurrencyDto>> GetCurrencies(int page = 1, int pageSize = 5);
+
+		Task<int> GetTotalCount();
 
 		Task CreateOrUpdate();
 	}

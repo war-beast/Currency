@@ -44,10 +44,21 @@ namespace CurrencyApp.Controllers
 
 		[HttpGet]
 		[Route("currencies")]
-		public async Task<IActionResult> GetCurrencies()
+		public async Task<IActionResult> GetCurrencies(int page = 1, int pageSize = 5)
 		{
-			var result = await _cbrCurrencyService.GetCurrencies();
+			var result = await _cbrCurrencyService.GetCurrencies(page, pageSize);
 
+			return Ok(JsonConvert.SerializeObject(result, Formatting.None, new JsonSerializerSettings
+			{
+				ContractResolver = new CamelCasePropertyNamesContractResolver()
+			}));
+		}
+
+		[HttpGet]
+		[Route("currencyCount")]
+		public async Task<IActionResult> GetCount()
+		{
+			var result = await _cbrCurrencyService.GetTotalCount();
 			return Ok(JsonConvert.SerializeObject(result, Formatting.None, new JsonSerializerSettings
 			{
 				ContractResolver = new CamelCasePropertyNamesContractResolver()
