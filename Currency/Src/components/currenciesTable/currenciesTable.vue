@@ -1,5 +1,15 @@
 ﻿<template>
 	<div class="container-fluid">
+		<div class="row d-flex flex-wrap justify-content-between align-items-center my-4">
+			<div>
+				Всего: {{totalCount}} записей
+			</div>
+			<div>
+				<button role="button" v-on:click="showPrevious" v-if="page > 1" class="btn btn-primary">Назад</button>
+				Страница: {{page}} из {{pageCount}}
+				<button role="button" v-on:click="showNext" v-if="page < pageCount" class="btn btn-primary">Вперёд</button>
+			</div>
+		</div>
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>

@@ -18,20 +18,50 @@ import Component from "vue-class-component";
 import RowComponent from "Components/currenciesTable/currenciesTableRow.vue";
 import ApiRequest from "Util/request";
 const currenciesListUrl = "/api/common/currencies";
+const currenciesTotalCountUrl = "/api/common/currencyCount";
 let CurrenciesTable = class CurrenciesTable extends Vue {
     constructor() {
         super();
         this.currencies = [];
+        this.totalCount = 0;
+        this.pageCount = 0;
         this.visibleRowCount = 5;
-        this.loadData();
+        this.page = 1;
+        this.loadCount();
+        this.loadData(this.page, this.visibleRowCount);
     }
-    loadData() {
+    showPrevious() {
+        if (this.page > 1) {
+            this.loadData(--this.page, this.visibleRowCount);
+        }
+    }
+    showNext() {
+        if (this.page < this.pageCount) {
+            this.loadData(++this.page, this.visibleRowCount);
+        }
+    }
+    loadData(page, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             let apiRequest = new ApiRequest();
-            yield apiRequest.getData(currenciesListUrl)
+            yield apiRequest.getData(`${currenciesListUrl}?page=${page}&pageSize=${pageSize}`)
                 .then((result) => {
                 if (result.success) {
                     this.currencies = JSON.parse(result.value);
+                }
+                else {
+                    console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
+                }
+            });
+        });
+    }
+    loadCount() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let apiRequest = new ApiRequest();
+            yield apiRequest.getData(currenciesTotalCountUrl)
+                .then((result) => {
+                if (result.success) {
+                    this.totalCount = JSON.parse(result.value);
+                    this.pageCount = Math.ceil(this.totalCount / this.visibleRowCount);
                 }
                 else {
                     console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);

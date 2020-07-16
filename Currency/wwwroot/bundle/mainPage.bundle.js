@@ -3836,20 +3836,50 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 const currenciesListUrl = "/api/common/currencies";
+const currenciesTotalCountUrl = "/api/common/currencyCount";
 let CurrenciesTable = class CurrenciesTable extends vue__WEBPACK_IMPORTED_MODULE_0__["default"] {
     constructor() {
         super();
         this.currencies = [];
+        this.totalCount = 0;
+        this.pageCount = 0;
         this.visibleRowCount = 5;
-        this.loadData();
+        this.page = 1;
+        this.loadCount();
+        this.loadData(this.page, this.visibleRowCount);
     }
-    loadData() {
+    showPrevious() {
+        if (this.page > 1) {
+            this.loadData(--this.page, this.visibleRowCount);
+        }
+    }
+    showNext() {
+        if (this.page < this.pageCount) {
+            this.loadData(++this.page, this.visibleRowCount);
+        }
+    }
+    loadData(page, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
             let apiRequest = new Util_request__WEBPACK_IMPORTED_MODULE_3__["default"]();
-            yield apiRequest.getData(currenciesListUrl)
+            yield apiRequest.getData(`${currenciesListUrl}?page=${page}&pageSize=${pageSize}`)
                 .then((result) => {
                 if (result.success) {
                     this.currencies = JSON.parse(result.value);
+                }
+                else {
+                    console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
+                }
+            });
+        });
+    }
+    loadCount() {
+        return __awaiter(this, void 0, void 0, function* () {
+            let apiRequest = new Util_request__WEBPACK_IMPORTED_MODULE_3__["default"]();
+            yield apiRequest.getData(currenciesTotalCountUrl)
+                .then((result) => {
+                if (result.success) {
+                    this.totalCount = JSON.parse(result.value);
+                    this.pageCount = Math.ceil(this.totalCount / this.visibleRowCount);
                 }
                 else {
                     console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
@@ -4072,6 +4102,51 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
+    _c(
+      "div",
+      {
+        staticClass:
+          "row d-flex flex-wrap justify-content-between align-items-center my-4"
+      },
+      [
+        _c("div", [
+          _vm._v("\n\t\t\tВсего: " + _vm._s(_vm.totalCount) + " записей\n\t\t")
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _vm.page > 1
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { role: "button" },
+                  on: { click: _vm.showPrevious }
+                },
+                [_vm._v("Назад")]
+              )
+            : _vm._e(),
+          _vm._v(
+            "\n\t\t\tСтраница: " +
+              _vm._s(_vm.page) +
+              " из " +
+              _vm._s(_vm.pageCount) +
+              "\n\t\t\t"
+          ),
+          _vm.page < _vm.pageCount
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { role: "button" },
+                  on: { click: _vm.showNext }
+                },
+                [_vm._v("Вперёд")]
+              )
+            : _vm._e()
+        ])
+      ]
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "table-responsive" }, [
       _c("table", { staticClass: "table table-hover" }, [
         _vm._m(0),
