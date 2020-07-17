@@ -78,16 +78,6 @@ namespace CurrencyApp
 					options.SaveToken = true;
 				});
 
-			services.AddAuthentication(sharedOptions =>
-				{
-					sharedOptions.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-					sharedOptions.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
-				})
-				.AddCookie(options => //CookieAuthenticationOptions
-				{
-					options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Identity/Account/Login");
-				});
-
 			services.AddControllersWithViews().AddNewtonsoftJson();
 
 			services.AddMvc(option =>

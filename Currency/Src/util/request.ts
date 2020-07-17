@@ -4,7 +4,7 @@ import RequestException from "Exceptions/requestException";
 import { ApiResult } from "Models/apiResult";
 import Cookies from "cookies-ts"
 
-const tokenKey = ".AspNetCore.Identity.Application";//"access_token";
+const tokenKey = "access_token";
 
 export default class ApiRequest {
 	private token: string;
