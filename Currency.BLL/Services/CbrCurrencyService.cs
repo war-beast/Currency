@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CurrencyApp.BLL.Dto;
+using CurrencyApp.BLL.Extensions;
 using CurrencyApp.BLL.Interfaces;
 using CurrencyApp.DAL.Entity;
 using CurrencyApp.DAL.Interface;
@@ -43,24 +44,28 @@ namespace CurrencyApp.BLL.Services
 					.Skip((page - 1) * pageSize)
 					.Take(pageSize)));
 
-		public async Task<int> GetTotalCount() => 
-			await Task.Run(() =>_unitOfWork.CurrencyRepository.GetAll().Count());
+		public async Task<int> GetTotalCount() =>
+			await Task.Run(() => _unitOfWork.CurrencyRepository.GetAll().Count());
 
 
 		public async Task CreateOrUpdate()
 		{
 			var currencies = await _currencyParsingService.GetParsed();
 
-			foreach (var currency in currencies)
+			foreach (var currency in currencies.Currencies)
 			{
-				var existCurrency = _unitOfWork.CurrencyRepository
-					.GetAll()
-					.FirstOrDefault(x => x.Id.Equals(currency.Id));
+				var existCurrency = _unitOfWork.CurrencyRepository.Get(currency.Id);
 
 				if (existCurrency == null)
+				{
 					_unitOfWork.CurrencyRepository.Create(_mapper.Map<Currency>(currency));
+				}
 				else
-					_unitOfWork.CurrencyRepository.Update(_mapper.Map<Currency>(currency));
+				{
+					_unitOfWork.CurrencyRepository.Update(existCurrency);
+				}
+
+				//TODO: здесь надо проверить дату и заполнить историю курсов от последней записи до текущего дня
 			}
 
 			await _unitOfWork.Save();

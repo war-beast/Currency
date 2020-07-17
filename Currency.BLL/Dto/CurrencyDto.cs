@@ -1,4 +1,6 @@
-﻿namespace CurrencyApp.BLL.Dto
+﻿using System.Collections.Generic;
+
+namespace CurrencyApp.BLL.Dto
 {
 	public class CurrencyDto
 	{
@@ -7,5 +9,7 @@
 		public string Name { get; set; }
 
 		public float Rate { get; set; }
+
+		public IEnumerable<DailyRateDto> DayRates { get; set; }
 	}
 }

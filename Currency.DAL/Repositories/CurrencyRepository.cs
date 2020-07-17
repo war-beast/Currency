@@ -63,7 +63,6 @@ namespace CurrencyApp.DAL.Repositories
 				.First(x => x.Id.Equals(item.Id));
 
 			_db.Entry(local).CurrentValues.SetValues(item);
-			_db.Entry(local.DayRates).CurrentValues.SetValues(item.DayRates);
 		}
 
 		public void Delete(string id)
