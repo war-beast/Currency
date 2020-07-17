@@ -1,8 +1,19 @@
-﻿import axios from "axios";
+﻿import Vue from "Vue";
+import axios from "axios";
 import RequestException from "Exceptions/requestException";
 import { ApiResult } from "Models/apiResult";
+import Cookies from "cookies-ts"
+
+const tokenKey = ".AspNetCore.Identity.Application";//"access_token";
 
 export default class ApiRequest {
+	private token: string;
+
+	constructor() {
+		const cookies = new Cookies();
+		this.token = cookies.get(tokenKey);
+	}
+
 	public async getData(url: string) {
 		return await this.sendGetRequest(url)
 			.then((result: ApiResult) => {
@@ -21,7 +32,8 @@ export default class ApiRequest {
 		return await axios.get(url,
 			{
 				headers: {
-					"Accept": "application/json"
+					"Accept": "application/json",
+					"Authorization": "Bearer " + this.token
 				}
 			}).then((result) => {
 				return new ApiResult(true, result.data);
@@ -36,7 +48,8 @@ export default class ApiRequest {
 			{
 				headers: {
 					"Accept": "application/json",
-					"Content-type": "application/json;charset=utf-8"
+					"Content-type": "application/json;charset=utf-8",
+					"Authorization": "Bearer " + this.token
 				}
 			}).then((result) => {
 				return new ApiResult(true, result.data);

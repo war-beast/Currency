@@ -10,7 +10,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import axios from "axios";
 import RequestException from "Exceptions/requestException";
 import { ApiResult } from "Models/apiResult";
+import Cookies from "cookies-ts";
+const tokenKey = ".AspNetCore.Identity.Application"; //"access_token";
 export default class ApiRequest {
+    constructor() {
+        const cookies = new Cookies();
+        this.token = cookies.get(tokenKey);
+    }
     getData(url) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.sendGetRequest(url)
@@ -31,7 +37,8 @@ export default class ApiRequest {
         return __awaiter(this, void 0, void 0, function* () {
             return yield axios.get(url, {
                 headers: {
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + this.token
                 }
             }).then((result) => {
                 return new ApiResult(true, result.data);
@@ -45,7 +52,8 @@ export default class ApiRequest {
             return yield axios.post(url, data, {
                 headers: {
                     "Accept": "application/json",
-                    "Content-type": "application/json;charset=utf-8"
+                    "Content-type": "application/json;charset=utf-8",
+                    "Authorization": "Bearer " + this.token
                 }
             }).then((result) => {
                 return new ApiResult(true, result.data);

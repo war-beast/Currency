@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using CurrencyApp.BLL.Interfaces.Api;
 using CurrencyApp.BLL.Models.Api;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -11,7 +12,8 @@ namespace CurrencyApp.Controllers
 {
 	[Route("api/common")]
 	[ApiController]
-	public class ApiController : ControllerBase
+	[Authorize]
+	public class ApiCommonController : ControllerBase
 	{
 		#region private members
 
@@ -21,7 +23,7 @@ namespace CurrencyApp.Controllers
 
 		#region constructor
 
-		public ApiController(ICbrCurrencyService cbrCurrencyService)
+		public ApiCommonController(ICbrCurrencyService cbrCurrencyService)
 		{
 			_cbrCurrencyService = cbrCurrencyService ?? throw new ArgumentNullException(nameof(cbrCurrencyService));
 		}

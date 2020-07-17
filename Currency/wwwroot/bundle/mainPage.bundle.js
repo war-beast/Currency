@@ -307,6 +307,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var Exceptions_requestException__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Exceptions/requestException */ "./Src/exceptions/requestException.ts");
 /* harmony import */ var Models_apiResult__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Models/apiResult */ "./Src/models/apiResult.ts");
+/* harmony import */ var cookies_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! cookies-ts */ "./node_modules/cookies-ts/lib/main.esm.js");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -318,7 +319,13 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+
+const tokenKey = ".AspNetCore.Identity.Application"; //"access_token";
 class ApiRequest {
+    constructor() {
+        const cookies = new cookies_ts__WEBPACK_IMPORTED_MODULE_3__["default"]();
+        this.token = cookies.get(tokenKey);
+    }
     getData(url) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.sendGetRequest(url)
@@ -339,7 +346,8 @@ class ApiRequest {
         return __awaiter(this, void 0, void 0, function* () {
             return yield axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
                 headers: {
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + this.token
                 }
             }).then((result) => {
                 return new Models_apiResult__WEBPACK_IMPORTED_MODULE_2__["ApiResult"](true, result.data);
@@ -353,7 +361,8 @@ class ApiRequest {
             return yield axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, data, {
                 headers: {
                     "Accept": "application/json",
-                    "Content-type": "application/json;charset=utf-8"
+                    "Content-type": "application/json;charset=utf-8",
+                    "Authorization": "Bearer " + this.token
                 }
             }).then((result) => {
                 return new Models_apiResult__WEBPACK_IMPORTED_MODULE_2__["ApiResult"](true, result.data);
@@ -2188,6 +2197,132 @@ module.exports = {
   extend: extend,
   trim: trim
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/cookies-ts/lib/main.esm.js":
+/*!*************************************************!*\
+  !*** ./node_modules/cookies-ts/lib/main.esm.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+class main {
+    constructor() {
+        this.DEFAULT_CONFIG = {
+            expires: "1d",
+            path: "; path=/"
+        };
+    }
+    config(option) {
+        if (option.expires) {
+            this.DEFAULT_CONFIG.expires = option.expires;
+        }
+        if (option.path === "") {
+            this.DEFAULT_CONFIG.path = "";
+        }
+        else {
+            this.DEFAULT_CONFIG.path = "; path=" + option.path;
+        }
+    }
+    get(key) {
+        let value = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        if (value && value.startsWith("{") && value.endsWith("}")) {
+            try {
+                value = JSON.parse(value);
+            }
+            catch (e) {
+                return value;
+            }
+        }
+        return value;
+    }
+    set(key, value, option = {}) {
+        if (!key) {
+            throw new Error("cookie name is not find in first argument");
+        }
+        else if (/^(?:expires|max\-age|path|domain|secure)$/i.test(key)) {
+            throw new Error("cookie key name illegality ,Cannot be set to ['expires','max-age','path','domain','secure']\tcurrent key name: " + key);
+        }
+        // support json object
+        if (value && value.constructor === Object) {
+            value = JSON.stringify(value);
+        }
+        let _expires = "; max-age=86400"; // temp value, default expire time for 1 day
+        let expires = option.expires || this.DEFAULT_CONFIG.expires;
+        if (expires) {
+            switch (expires.constructor) {
+                case Number:
+                    if (expires === Infinity || expires === -1)
+                        _expires = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+                    else
+                        _expires = "; max-age=" + expires;
+                    break;
+                case String:
+                    if (/^(?:\d{1,}(y|m|d|h|min|s))$/i.test(expires)) {
+                        // get capture number group
+                        let _expireTime = expires.replace(/^(\d{1,})(?:y|m|d|h|min|s)$/i, "$1");
+                        // get capture type group , to lower case
+                        switch (expires.replace(/^(?:\d{1,})(y|m|d|h|min|s)$/i, "$1").toLowerCase()) {
+                            // Frequency sorting
+                            case 'm':
+                                _expires = "; max-age=" + +_expireTime * 2592000;
+                                break; // 60 * 60 * 24 * 30
+                            case 'd':
+                                _expires = "; max-age=" + +_expireTime * 86400;
+                                break; // 60 * 60 * 24
+                            case 'h':
+                                _expires = "; max-age=" + +_expireTime * 3600;
+                                break; // 60 * 60
+                            case 'min':
+                                _expires = "; max-age=" + +_expireTime * 60;
+                                break; // 60
+                            case 's':
+                                _expires = "; max-age=" + _expireTime;
+                                break;
+                            case 'y':
+                                _expires = "; max-age=" + +_expireTime * 31104000;
+                                break; // 60 * 60 * 24 * 30 * 12
+                            default:
+                        }
+                    }
+                    else {
+                        _expires = "; expires=" + expires;
+                    }
+                    break;
+                case Date:
+                    _expires = "; expires=" + expires.toUTCString();
+                    break;
+            }
+        }
+        document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(value) + _expires + (option.domain ? "; domain=" + option.domain : "") + (option.path ? "; path=" + option.path : this.DEFAULT_CONFIG.path) + (option.secure ? "; secure" : "");
+        return this;
+    }
+    remove(key, option = {}) {
+        if (!key || !this.isKey(key)) {
+            return false;
+        }
+        document.cookie = encodeURIComponent(key) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (option.domain ? "; domain=" + option.domain : "") + (option.path ? "; path=" + option.path : this.DEFAULT_CONFIG.path);
+        return this;
+    }
+    isKey(key) {
+        return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+    }
+    keys() {
+        if (!document.cookie)
+            return [];
+        var _keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+        for (var _index = 0; _index < _keys.length; _index++) {
+            _keys[_index] = decodeURIComponent(_keys[_index]);
+        }
+        return _keys;
+    }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (main);
 
 
 /***/ }),
