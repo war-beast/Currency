@@ -9,6 +9,7 @@ namespace CurrencyApp.DAL.DataContext
 	public sealed class ApplicationContext : DbContext
 	{
 		public DbSet<Currency> Currencies { get; set; }
+		public DbSet<DailyRate> DailyRates { get; set; }
 
 		public ApplicationContext(DbContextOptions<ApplicationContext> options)
 			: base(options)
@@ -19,7 +20,10 @@ namespace CurrencyApp.DAL.DataContext
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Currency>()
-				.HasKey(x => x.Id);
+				.HasMany<DailyRate>(x => x.DayRates)
+				.WithOne(x => x.Currency)
+				.HasForeignKey(x => x.CurrencyId)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 
