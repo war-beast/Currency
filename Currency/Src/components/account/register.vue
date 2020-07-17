@@ -1,0 +1,33 @@
+﻿<template>
+	<div class="row">
+		<form>
+			<h4>Создание нового аккаунта.</h4>
+			<hr />
+			<div class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Email"></label>
+				<input asp-for="Email" class="form-control" required="" />
+				<div class="invalid-feedback">
+					Пожалуйста введите Email
+				</div>
+			</div>
+			<div class="form-group">
+				<label asp-for="Password"></label>
+				<input asp-for="Password" class="form-control" />
+				<div class="invalid-feedback">
+					Пожалуйста введите пароль
+				</div>
+			</div>
+			<div class="form-group">
+				<label asp-for="ConfirmPassword"></label>
+				<input asp-for="ConfirmPassword" class="form-control" />
+				<div class="invalid-feedback">
+					Пожалуйста введите подтверждение пароля
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+		</form>
+	</div>
+</template>
+
+<script src="./register.ts" lang="ts"></script>

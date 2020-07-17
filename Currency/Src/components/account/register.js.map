@@ -1,0 +1,1 @@
+{"version":3,"file":"register.js","sourceRoot":"","sources":["register.ts"],"names":[],"mappings":";;;;;;AAAA,OAAO,GAAG,MAAM,KAAK,CAAC;AACtB,OAAO,SAAS,MAAM,qBAAqB,CAAC;AAG5C,MAAM,WAAW,GAAG,oBAAoB,CAAC;AAGzC,IAAqB,iBAAiB,GAAtC,MAAqB,iBAAkB,SAAQ,GAAG;CAEjD,CAAA;AAFoB,iBAAiB;IADrC,SAAS;GACW,iBAAiB,CAErC;eAFoB,iBAAiB"}

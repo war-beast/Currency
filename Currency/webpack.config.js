@@ -12,7 +12,9 @@ const bundleFolder = "wwwroot/bundle/";
 
 let configuration = {
 	entry: {
-		mainPage: "./Src/pages/main/init.js"
+		mainPage: "./Src/pages/main/init.js",
+		loginPage: "./Src/pages/login/init.js",
+		registerPage: "./Src/pages/register/init.js"
 	},
 	output: {
 		filename: "[name].bundle.js",
