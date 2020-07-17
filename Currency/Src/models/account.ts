@@ -1,4 +1,16 @@
-﻿export class LoginModel {
+﻿export class RegisterModel {
+	private email: string;
+	private password: string;
+	private confirmPassword: string;
+
+	constructor(email: string, password: string, confirmPassword: string) {
+		this.email = email;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
+	}
+}
+
+export class LoginModel {
 	private email: string;
 	private password: string;
 	private rememberMe: boolean = false;

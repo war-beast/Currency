@@ -21,7 +21,7 @@ namespace CurrencyApp.Controllers
 		}
 
 		[Authorize]
-		public IActionResult Privacy()
+		public IActionResult About()
 		{
 			return View();
 		}

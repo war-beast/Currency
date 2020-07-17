@@ -4,6 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-Currency-C9406F79-741F-407C-8793-6C57A03F2651</UserSecretsId>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <Version>1.0.1</Version>
+    <Company>Шарапов Владимир</Company>
+    <Description>Тестовая задача на уровень middle-senior. Применённые технологии: ASP.NET Core 3.1, JavaScript ES2015, TypeScript 2.9.2, VueJS 2.6.11</Description>
+    <Copyright>Копирайт</Copyright>
+    <RepositoryUrl>https://github.com/war-beast/Currency</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

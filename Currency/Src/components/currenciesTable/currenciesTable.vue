@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table table-hover">
+			<table class="table table-hover" v-if="isUserAuthorized">
 				<thead>
 					<tr>
 						<th>Id</th>
@@ -26,6 +26,9 @@
 								 v-bind:showDetails="(id) => showDetails(id)" />
 				</tbody>
 			</table>
+			<div v-else>
+				Чтобы увидеть данные о курсах валют, надо войти со своей учётной записью.
+			</div>
 		</div>
 
 		<!-- Modal -->

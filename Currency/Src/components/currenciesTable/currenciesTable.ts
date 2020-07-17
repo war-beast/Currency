@@ -22,6 +22,7 @@ export default class CurrenciesTable extends Vue {
 	private visibleRowCount: number = 5;
 	private page: number = 1;
 	private isInfoVisible: boolean = false;
+	private isUserAuthorized: boolean = true;
 
 	private readonly apiRequest: ApiRequest;
 
@@ -53,6 +54,9 @@ export default class CurrenciesTable extends Vue {
 					this.isInfoVisible = true;
 				} else {
 					console.log(`Ошибка загрузки данных по url: ${currencyDetails}`);
+
+					if (result.value.indexOf("401") !== -1)
+						this.isUserAuthorized = false;
 				}
 			});
 	}
@@ -69,6 +73,9 @@ export default class CurrenciesTable extends Vue {
 					this.currencies = JSON.parse(result.value);
 				} else {
 					console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
+
+					if (result.value.indexOf("401") !== -1)
+						this.isUserAuthorized = false;
 				}
 			});
 	}

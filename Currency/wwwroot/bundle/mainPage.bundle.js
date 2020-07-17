@@ -389,11 +389,10 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
-const tokenKey = "access_token";
 class ApiRequest {
     constructor() {
         const cookies = new cookies_ts__WEBPACK_IMPORTED_MODULE_3__["default"]();
-        this.token = cookies.get(tokenKey);
+        this.token = cookies.get(globalAccessToken);
     }
     getData(url) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -1646,6 +1645,7 @@ let CurrenciesTable = class CurrenciesTable extends vue__WEBPACK_IMPORTED_MODULE
         this.visibleRowCount = 5;
         this.page = 1;
         this.isInfoVisible = false;
+        this.isUserAuthorized = true;
         this.apiRequest = new Util_request__WEBPACK_IMPORTED_MODULE_3__["default"]();
         setTimeout(() => {
             this.loadCount();
@@ -1670,6 +1670,8 @@ let CurrenciesTable = class CurrenciesTable extends vue__WEBPACK_IMPORTED_MODULE
                 }
                 else {
                     console.log(`Ошибка загрузки данных по url: ${currencyDetails}`);
+                    if (result.value.indexOf("401") !== -1)
+                        this.isUserAuthorized = false;
                 }
             });
         });
@@ -1687,6 +1689,8 @@ let CurrenciesTable = class CurrenciesTable extends vue__WEBPACK_IMPORTED_MODULE
                 }
                 else {
                     console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
+                    if (result.value.indexOf("401") !== -1)
+                        this.isUserAuthorized = false;
                 }
             });
         });
@@ -1819,25 +1823,31 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "table-responsive" }, [
-      _c("table", { staticClass: "table table-hover" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.currencies, function(item, index) {
-            return _c("currencyRow", {
-              key: "item__" + index,
-              attrs: {
-                currency: item,
-                showDetails: function(id) {
-                  return _vm.showDetails(id)
-                }
-              }
-            })
-          }),
-          1
-        )
-      ])
+      _vm.isUserAuthorized
+        ? _c("table", { staticClass: "table table-hover" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.currencies, function(item, index) {
+                return _c("currencyRow", {
+                  key: "item__" + index,
+                  attrs: {
+                    currency: item,
+                    showDetails: function(id) {
+                      return _vm.showDetails(id)
+                    }
+                  }
+                })
+              }),
+              1
+            )
+          ])
+        : _c("div", [
+            _vm._v(
+              "\n\t\t\tЧтобы увидеть данные о курсах валют, надо войти со своей учётной записью.\n\t\t"
+            )
+          ])
     ]),
     _vm._v(" "),
     _c(

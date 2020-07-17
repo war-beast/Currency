@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "О сайте";
+}
+<h1>@ViewData["Title"]</h1>
+
+<article class="markdown-body entry-content container-lg" itemprop="text">
+	<h1><a id="user-content-веб-приложение-курс-валют" class="anchor" aria-hidden="true" href="#веб-приложение-курс-валют"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Веб-приложение "Курс валют"</h1>
+	<p><a href="https://copist.ru/ru/blog/2019/01/27/test-tasks-for-middle-and-senior-developers/" rel="nofollow">Тестовое задание на уровень middle</a></p>
+	<p>
+		Необходимо реализовать сервис с следующим функционалом с на языке XXX использованием фреймворка YYY.
+		В базе данных ZZZ должна быть таблица currency c колонками:
+	</p>
+	<ul>
+		<li>id — первичный ключ</li>
+		<li>name — название валюты</li>
+		<li>rate — курс валюты к рублю</li>
+	</ul>
+	<p>Должна быть консольная команда для обновления данных в таблице currency. Данные по курсам валют можно взять отсюда: <a href="http://www.cbr.ru/scripts/XML_daily.asp" rel="nofollow">http://www.cbr.ru/scripts/XML_daily.asp</a></p>
+	<p>Реализовать 2 REST API метода:</p>
+	<ul>
+		<li>GET /currencies — должен возвращать список курсов валют с возможность пагинации</li>
+		<li>GET /currency/ — должен возвращать курс валюты для переданного id</li>
+		<li>API должно быть закрыто bearer авторизацией.</li>
+	</ul>
+	<hr>
+	<h2><a id="user-content-часть-2-senior-web-developer" class="anchor" aria-hidden="true" href="#часть-2-senior-web-developer"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Часть 2 (Senior Web Developer)</h2>
+	<p>
+		Необходимо реализовать сервис, выдающий текущий курс валюты и историю изменения курса через HTTP REST API, с доступом только для авторизованных пользователей.
+		Фреймворк YYY, можно использовать БД ZZZ.
+		Доп требование:
+	</p>
+	<ol>
+		<li>История курсов валют должна быть на каждый день, без пропусков.</li>
+		<li>Объяснить, что нужно добавить или изменить, чтобы сервис мог выдержать 1500 запросов в секунду.</li>
+	</ol>
+</article>

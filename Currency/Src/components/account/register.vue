@@ -1,32 +1,37 @@
 ﻿<template>
 	<div class="row">
-		<form>
-			<h4>Создание нового аккаунта.</h4>
-			<hr />
-			<div class="text-danger"></div>
-			<div class="form-group">
-				<label asp-for="Email"></label>
-				<input asp-for="Email" class="form-control" required="" />
-				<div class="invalid-feedback">
-					Пожалуйста введите Email
+		<section v-if="!isRegistrationSuccess">
+			<form v-bind:class="{ 'was-validated': !formValid }">
+				<h4>Создание нового аккаунта <span class="text-muted">(все поля заполнить обязательно)</span></h4>
+				<hr />
+				<div class="text-danger" v-if="loginError != ''">{{registerError}}</div>
+				<div class="form-group">
+					<label for="emailField">Email</label>
+					<input id="emailField" class="form-control" required="" type="email" v-model="email" />
+					<div class="invalid-feedback">
+						Пожалуйста введите Email
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label asp-for="Password"></label>
-				<input asp-for="Password" class="form-control" />
-				<div class="invalid-feedback">
-					Пожалуйста введите пароль
+				<div class="form-group">
+					<label for="passwordField">Пароль</label>
+					<input id="passwordField" class="form-control" required="" type="password" v-model="password" />
+					<div class="invalid-feedback">
+						Пожалуйста введите пароль
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label asp-for="ConfirmPassword"></label>
-				<input asp-for="ConfirmPassword" class="form-control" />
-				<div class="invalid-feedback">
-					Пожалуйста введите подтверждение пароля
+				<div class="form-group">
+					<label for="confirmPasswordField">Подтверждение пароля</label>
+					<input id="confirmPasswordField" class="form-control" required="" type="password" v-model="confirmPassword" />
+					<div class="invalid-feedback">
+						Пожалуйста введите подтверждение пароля
+					</div>
 				</div>
-			</div>
-			<button type="button" class="btn btn-primary">Зарегистрироваться</button>
-		</form>
+				<button type="button" class="btn btn-primary" v-on:click="register">Зарегистрироваться</button>
+			</form>
+		</section>
+		<section v-else>
+			Вы успешно зарегистрировались, теперь можно <a href="/Identity/Account/Login">войти</a> с этими учётными данными, чтобы увидеть курсы валют на главной странице.
+		</section>
 	</div>
 </template>
 

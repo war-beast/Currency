@@ -11,11 +11,10 @@ import axios from "axios";
 import RequestException from "Exceptions/requestException";
 import { ApiResult } from "Models/apiResult";
 import Cookies from "cookies-ts";
-const tokenKey = "access_token";
 export default class ApiRequest {
     constructor() {
         const cookies = new Cookies();
-        this.token = cookies.get(tokenKey);
+        this.token = cookies.get(globalAccessToken);
     }
     getData(url) {
         return __awaiter(this, void 0, void 0, function* () {

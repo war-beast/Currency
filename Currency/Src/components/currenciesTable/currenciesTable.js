@@ -30,6 +30,7 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
         this.visibleRowCount = 5;
         this.page = 1;
         this.isInfoVisible = false;
+        this.isUserAuthorized = true;
         this.apiRequest = new ApiRequest();
         setTimeout(() => {
             this.loadCount();
@@ -54,6 +55,8 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
                 }
                 else {
                     console.log(`Ошибка загрузки данных по url: ${currencyDetails}`);
+                    if (result.value.indexOf("401") !== -1)
+                        this.isUserAuthorized = false;
                 }
             });
         });
@@ -71,6 +74,8 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
                 }
                 else {
                     console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
+                    if (result.value.indexOf("401") !== -1)
+                        this.isUserAuthorized = false;
                 }
             });
         });

@@ -18,7 +18,6 @@ import Component from "vue-class-component";
 import ApiRequest from "Util/request";
 import { LoginModel } from "Models/account";
 import Cookies from "cookies-ts";
-const tokenKey = "access_token";
 const loginUrl = "/api/account/token";
 let LoginComponent = class LoginComponent extends Vue {
     constructor() {
@@ -45,7 +44,7 @@ let LoginComponent = class LoginComponent extends Vue {
                 if (result.success) {
                     const cookies = new Cookies();
                     const apiResponse = (result.value);
-                    cookies.set(tokenKey, apiResponse.access_token, { expires: "100d" });
+                    cookies.set(globalAccessToken, apiResponse.access_token, { expires: "100d" });
                     this.userName = apiResponse.username;
                 }
                 else {
@@ -55,7 +54,8 @@ let LoginComponent = class LoginComponent extends Vue {
         });
     }
     checkValid() {
-        return this.email !== "" && this.password !== "";
+        return this.email !== ""
+            && this.password !== "";
     }
 };
 LoginComponent = __decorate([

@@ -22,7 +22,7 @@
 				<div class="form-group">
 					<div class="custom-control custom-checkbox">
 						<input id="rememberMeField" type="checkbox" class="custom-control-input" v-model="rememberMe" />
-						<label for="rememberMeField"> Запомнить меня</label>
+						<label for="rememberMeField" class="custom-control-label"> Запомнить меня</label>
 					</div>
 				</div>
 				<div class="form-group">

@@ -4,14 +4,12 @@ import RequestException from "Exceptions/requestException";
 import { ApiResult } from "Models/apiResult";
 import Cookies from "cookies-ts"
 
-const tokenKey = "access_token";
-
 export default class ApiRequest {
 	private token: string;
 
 	constructor() {
 		const cookies = new Cookies();
-		this.token = cookies.get(tokenKey);
+		this.token = cookies.get(globalAccessToken);
 	}
 
 	public async getData(url: string) {

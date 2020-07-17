@@ -5,8 +5,6 @@ import { ApiResult } from "Models/apiResult";
 import { LoginModel, TokenResult } from "Models/account";
 import Cookies from "cookies-ts"
 
-const tokenKey = "access_token";
-
 const loginUrl = "/api/account/token";
 
 @Component
@@ -42,7 +40,7 @@ export default class LoginComponent extends Vue {
 				if (result.success) {
 					const cookies = new Cookies();
 					const apiResponse = ((result.value) as any) as TokenResult;
-					cookies.set(tokenKey, apiResponse.access_token, { expires: "100d" });
+					cookies.set(globalAccessToken, apiResponse.access_token, { expires: "100d" });
 					this.userName = apiResponse.username;
 				} else {
 					this.loginError = `Не удалось войти по логину: ${this.email}`;
@@ -51,6 +49,7 @@ export default class LoginComponent extends Vue {
 	}
 
 	private checkValid(): boolean {
-		return this.email !== "" && this.password !== "";
+		return this.email !== ""
+			&& this.password !== "";
 	}
 }

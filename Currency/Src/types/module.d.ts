@@ -2,3 +2,5 @@
 	import Vue from "vue";
 	export default Vue;
 }
+
+declare var globalAccessToken: string;

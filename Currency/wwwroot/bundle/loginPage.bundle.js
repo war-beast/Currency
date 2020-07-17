@@ -248,13 +248,21 @@ class RequestException extends Error {
 /*!*******************************!*\
   !*** ./Src/models/account.ts ***!
   \*******************************/
-/*! exports provided: LoginModel, TokenResult */
+/*! exports provided: RegisterModel, LoginModel, TokenResult */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterModel", function() { return RegisterModel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginModel", function() { return LoginModel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenResult", function() { return TokenResult; });
+class RegisterModel {
+    constructor(email, password, confirmPassword) {
+        this.email = email;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
+}
 class LoginModel {
     constructor(email, password, rememberMe) {
         this.rememberMe = false;
@@ -349,11 +357,10 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
-const tokenKey = "access_token";
 class ApiRequest {
     constructor() {
         const cookies = new cookies_ts__WEBPACK_IMPORTED_MODULE_3__["default"]();
-        this.token = cookies.get(tokenKey);
+        this.token = cookies.get(globalAccessToken);
     }
     getData(url) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -452,7 +459,6 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
-const tokenKey = "access_token";
 const loginUrl = "/api/account/token";
 let LoginComponent = class LoginComponent extends vue__WEBPACK_IMPORTED_MODULE_0__["default"] {
     constructor() {
@@ -479,7 +485,7 @@ let LoginComponent = class LoginComponent extends vue__WEBPACK_IMPORTED_MODULE_0
                 if (result.success) {
                     const cookies = new cookies_ts__WEBPACK_IMPORTED_MODULE_4__["default"]();
                     const apiResponse = (result.value);
-                    cookies.set(tokenKey, apiResponse.access_token, { expires: "100d" });
+                    cookies.set(globalAccessToken, apiResponse.access_token, { expires: "100d" });
                     this.userName = apiResponse.username;
                 }
                 else {
@@ -489,7 +495,8 @@ let LoginComponent = class LoginComponent extends vue__WEBPACK_IMPORTED_MODULE_0
         });
     }
     checkValid() {
-        return this.email !== "" && this.password !== "";
+        return this.email !== ""
+            && this.password !== "";
     }
 };
 LoginComponent = __decorate([
@@ -632,9 +639,14 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("label", { attrs: { for: "rememberMeField" } }, [
-                  _vm._v(" Запомнить меня")
-                ])
+                _c(
+                  "label",
+                  {
+                    staticClass: "custom-control-label",
+                    attrs: { for: "rememberMeField" }
+                  },
+                  [_vm._v(" Запомнить меня")]
+                )
               ])
             ]),
             _vm._v(" "),
