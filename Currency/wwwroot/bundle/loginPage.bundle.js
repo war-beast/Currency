@@ -224,6 +224,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./Src/exceptions/requestException.ts":
+/*!********************************************!*\
+  !*** ./Src/exceptions/requestException.ts ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RequestException; });
+class RequestException extends Error {
+    constructor(url) {
+        super(`RequestException: ${url}`);
+        this.name = "RequestException";
+    }
+}
+
+
+/***/ }),
+
+/***/ "./Src/models/account.ts":
+/*!*******************************!*\
+  !*** ./Src/models/account.ts ***!
+  \*******************************/
+/*! exports provided: LoginModel, TokenResult */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginModel", function() { return LoginModel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenResult", function() { return TokenResult; });
+class LoginModel {
+    constructor(email, password, rememberMe) {
+        this.rememberMe = false;
+        this.email = email;
+        this.password = password;
+        this.rememberMe = rememberMe;
+    }
+}
+class TokenResult {
+    constructor(access_token, username) {
+        this.access_token = access_token;
+        this.username = username;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./Src/models/apiResult.ts":
+/*!*********************************!*\
+  !*** ./Src/models/apiResult.ts ***!
+  \*********************************/
+/*! exports provided: ApiResult */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiResult", function() { return ApiResult; });
+class ApiResult {
+    constructor(success, value) {
+        this.success = success;
+        this.value = value;
+    }
+}
+
+
+/***/ }),
+
 /***/ "./Src/pages/login/init.js":
 /*!*********************************!*\
   !*** ./Src/pages/login/init.js ***!
@@ -253,6 +322,102 @@ new AppCore();
 
 /***/ }),
 
+/***/ "./Src/util/request.ts":
+/*!*****************************!*\
+  !*** ./Src/util/request.ts ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ApiRequest; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var Exceptions_requestException__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Exceptions/requestException */ "./Src/exceptions/requestException.ts");
+/* harmony import */ var Models_apiResult__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Models/apiResult */ "./Src/models/apiResult.ts");
+/* harmony import */ var cookies_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! cookies-ts */ "./node_modules/cookies-ts/lib/main.esm.js");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+
+
+
+
+const tokenKey = "access_token";
+class ApiRequest {
+    constructor() {
+        const cookies = new cookies_ts__WEBPACK_IMPORTED_MODULE_3__["default"]();
+        this.token = cookies.get(tokenKey);
+    }
+    getData(url) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.sendGetRequest(url)
+                .then((result) => {
+                return result;
+            });
+        });
+    }
+    postData(url, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.sendPostRequest(url, data)
+                .then((result) => {
+                return result;
+            });
+        });
+    }
+    sendGetRequest(url) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": "Bearer " + this.token
+                }
+            }).then((result) => {
+                return new Models_apiResult__WEBPACK_IMPORTED_MODULE_2__["ApiResult"](true, result.data);
+            }).catch((error) => {
+                return this.getErrorResult(error, url);
+            });
+        });
+    }
+    sendPostRequest(url, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, data, {
+                headers: {
+                    "Accept": "application/json",
+                    "Content-type": "application/json;charset=utf-8",
+                    "Authorization": "Bearer " + this.token
+                }
+            }).then((result) => {
+                var res = new Models_apiResult__WEBPACK_IMPORTED_MODULE_2__["ApiResult"](true, result.data);
+                return res;
+            }).catch((error) => {
+                return this.getErrorResult(error, url);
+            });
+        });
+    }
+    getErrorResult(error, url) {
+        const errorResult = new Models_apiResult__WEBPACK_IMPORTED_MODULE_2__["ApiResult"](false, "");
+        if (error.response.data !== undefined && error.response.data !== "") {
+            console.error(new Exceptions_requestException__WEBPACK_IMPORTED_MODULE_1__["default"](url), error.response.data);
+            errorResult.value = error.response.data.title;
+        }
+        else {
+            console.error(new Exceptions_requestException__WEBPACK_IMPORTED_MODULE_1__["default"](url), error.message);
+            errorResult.value = error.message;
+        }
+        return errorResult;
+    }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/ts-loader/index.js?!./Src/components/account/login.ts?vue&type=script&lang=ts&":
 /*!***************************************************************************************************!*\
   !*** ./node_modules/ts-loader??ref--0!./Src/components/account/login.ts?vue&type=script&lang=ts& ***!
@@ -265,16 +430,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.common.js");
 /* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_class_component__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var Util_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Util/request */ "./Src/util/request.ts");
+/* harmony import */ var Models_account__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Models/account */ "./Src/models/account.ts");
+/* harmony import */ var cookies_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! cookies-ts */ "./node_modules/cookies-ts/lib/main.esm.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 
 
+
+
+
+const tokenKey = "access_token";
 const loginUrl = "/api/account/token";
 let LoginComponent = class LoginComponent extends vue__WEBPACK_IMPORTED_MODULE_0__["default"] {
+    constructor() {
+        super();
+        this.email = "";
+        this.password = "";
+        this.rememberMe = false;
+        this.formValid = true;
+        this.loginError = "";
+        this.userName = "";
+        this.apiRequest = new Util_request__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    }
+    logIn() {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.loginError = "";
+            this.formValid = this.checkValid();
+            if (!this.formValid) {
+                this.loginError = "Необходимо заполнить все поля формы!";
+                return;
+            }
+            const loginModel = new Models_account__WEBPACK_IMPORTED_MODULE_3__["LoginModel"](this.email, this.password, this.rememberMe);
+            yield this.apiRequest.postData(loginUrl, JSON.stringify(loginModel))
+                .then((result) => {
+                if (result.success) {
+                    const cookies = new cookies_ts__WEBPACK_IMPORTED_MODULE_4__["default"]();
+                    const apiResponse = (result.value);
+                    cookies.set(tokenKey, apiResponse.access_token, { expires: "100d" });
+                    this.userName = apiResponse.username;
+                }
+                else {
+                    this.loginError = `Не удалось войти по логину: ${this.email}`;
+                }
+            });
+        });
+    }
+    checkValid() {
+        return this.email !== "" && this.password !== "";
+    }
 };
 LoginComponent = __decorate([
     vue_class_component__WEBPACK_IMPORTED_MODULE_1___default.a
@@ -299,77 +515,164 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _vm.userName === ""
+      ? _c("section", [
+          _c("form", { class: { "was-validated": !_vm.formValid } }, [
+            _c("h4", [_vm._v("Введите данные учётной записи для входа.")]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm.loginError != ""
+              ? _c("div", { staticClass: "text-danger" }, [
+                  _vm._v(_vm._s(_vm.loginError))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "emailField" } }, [_vm._v("Email")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.email,
+                    expression: "email"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { "asp-for": "Email", required: "", type: "email" },
+                domProps: { value: _vm.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.email = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v("\n\t\t\t\t\tПожалуйста введите Email\n\t\t\t\t")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "passwordField" } }, [
+                _vm._v("Пароль")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password,
+                    expression: "password"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "passwordField", required: "", type: "password" },
+                domProps: { value: _vm.password },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.password = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "invalid-feedback" }, [
+                _vm._v("\n\t\t\t\t\tПожалуйста введите пароль\n\t\t\t\t")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "custom-control custom-checkbox" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.rememberMe,
+                      expression: "rememberMe"
+                    }
+                  ],
+                  staticClass: "custom-control-input",
+                  attrs: { id: "rememberMeField", type: "checkbox" },
+                  domProps: {
+                    checked: Array.isArray(_vm.rememberMe)
+                      ? _vm._i(_vm.rememberMe, null) > -1
+                      : _vm.rememberMe
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.rememberMe,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.rememberMe = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.rememberMe = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.rememberMe = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "rememberMeField" } }, [
+                  _vm._v(" Запомнить меня")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.logIn }
+                },
+                [_vm._v("Войти")]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ])
+      : _c("section", [
+          _vm._v(
+            "\n\t\tВы вошли успешно с Email " +
+              _vm._s(_vm.userName) +
+              ", теперь можно вернуться на "
+          ),
+          _c("a", { attrs: { href: "/" } }, [_vm._v("главную страницу")]),
+          _vm._v(".\n\t")
+        ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("section", [
-        _c("form", [
-          _c("h4", [_vm._v("Введите данные учётной записи для входа.")]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("div", {
-            staticClass: "text-danger",
-            attrs: { "asp-validation-summary": "All" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { "asp-for": "Email" } }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { "asp-for": "Email", required: "", type: "email" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v("\n\t\t\t\t\tПожалуйста введите Email\n\t\t\t\t")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { "asp-for": "Password" } }),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { "asp-for": "Password", required: "" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "invalid-feedback" }, [
-              _vm._v("\n\t\t\t\t\tПожалуйста введите пароль\n\t\t\t\t")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("div", { staticClass: "checkbox" }, [
-              _c("label", { attrs: { "asp-for": "RememberMe" } }, [
-                _c("input", { attrs: { "asp-for": "RememberMe" } }),
-                _vm._v(
-                  "\n\t\t\t\t\t\t@Html.DisplayNameFor(m => m.RememberMe)\n\t\t\t\t\t"
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Войти")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("p", [
-              _c("a", { attrs: { "asp-page": "./Register" } }, [
-                _vm._v("Зарегистрироваться")
-              ])
-            ])
-          ])
+    return _c("div", { staticClass: "form-group" }, [
+      _c("p", [
+        _c("a", { attrs: { href: "/Identity/Account/Register" } }, [
+          _vm._v("Зарегистрироваться")
         ])
       ])
     ])

@@ -23,11 +23,16 @@ export default class CurrenciesTable extends Vue {
 	private page: number = 1;
 	private isInfoVisible: boolean = false;
 
+	private readonly apiRequest: ApiRequest;
+
 	constructor() {
 		super();
 
-		this.loadCount();
-		this.loadData(this.page, this.visibleRowCount);
+		this.apiRequest = new ApiRequest();
+		setTimeout(() => {
+			this.loadCount();
+			this.loadData(this.page, this.visibleRowCount);
+		}, 0);
 	}
 
 	public showPrevious() {
@@ -36,13 +41,12 @@ export default class CurrenciesTable extends Vue {
 	}
 
 	public showNext() {
-		if (this.page < this.pageCount) 
+		if (this.page < this.pageCount)
 			this.loadData(++this.page, this.visibleRowCount);
 	}
 
 	public async showDetails(id: string) {
-		let apiRequest = new ApiRequest();
-		await apiRequest.getData(`${currencyDetails}?id=${id}`)
+		await this.apiRequest.getData(`${currencyDetails}?id=${id}`)
 			.then((result: ApiResult) => {
 				if (result.success) {
 					this.selectedCurrency = JSON.parse(result.value);
@@ -59,8 +63,7 @@ export default class CurrenciesTable extends Vue {
 	}
 
 	private async loadData(page: number, pageSize: number) {
-		let apiRequest = new ApiRequest();
-		await apiRequest.getData(`${currenciesListUrl}?page=${page}&pageSize=${pageSize}`)
+		await this.apiRequest.getData(`${currenciesListUrl}?page=${page}&pageSize=${pageSize}`)
 			.then((result: ApiResult) => {
 				if (result.success) {
 					this.currencies = JSON.parse(result.value);
@@ -71,9 +74,7 @@ export default class CurrenciesTable extends Vue {
 	}
 
 	private async loadCount() {
-		let apiRequest = new ApiRequest();
-
-		await apiRequest.getData(currenciesTotalCountUrl)
+		await this.apiRequest.getData(currenciesTotalCountUrl)
 			.then((result: ApiResult) => {
 				if (result.success) {
 					this.totalCount = JSON.parse(result.value) as number;

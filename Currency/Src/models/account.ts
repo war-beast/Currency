@@ -1,0 +1,21 @@
+﻿export class LoginModel {
+	private email: string;
+	private password: string;
+	private rememberMe: boolean = false;
+
+	constructor(email: string, password: string, rememberMe: boolean) {
+		this.email = email;
+		this.password = password;
+		this.rememberMe = rememberMe;
+	}
+}
+
+export class TokenResult {
+	readonly  access_token: string;
+	readonly  username: string;
+
+	constructor(access_token: string, username: string) {
+		this.access_token = access_token;
+		this.username = username;
+	}
+}

@@ -52,7 +52,8 @@ export default class ApiRequest {
 					"Authorization": "Bearer " + this.token
 				}
 			}).then((result) => {
-				return new ApiResult(true, result.data);
+				var res = new ApiResult(true, result.data);
+				return res;
 			}).catch((error) => {
 				return this.getErrorResult(error, url);
 			});

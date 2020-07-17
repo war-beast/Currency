@@ -30,8 +30,11 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
         this.visibleRowCount = 5;
         this.page = 1;
         this.isInfoVisible = false;
-        this.loadCount();
-        this.loadData(this.page, this.visibleRowCount);
+        this.apiRequest = new ApiRequest();
+        setTimeout(() => {
+            this.loadCount();
+            this.loadData(this.page, this.visibleRowCount);
+        }, 0);
     }
     showPrevious() {
         if (this.page > 1)
@@ -43,8 +46,7 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
     }
     showDetails(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let apiRequest = new ApiRequest();
-            yield apiRequest.getData(`${currencyDetails}?id=${id}`)
+            yield this.apiRequest.getData(`${currencyDetails}?id=${id}`)
                 .then((result) => {
                 if (result.success) {
                     this.selectedCurrency = JSON.parse(result.value);
@@ -62,8 +64,7 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
     }
     loadData(page, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
-            let apiRequest = new ApiRequest();
-            yield apiRequest.getData(`${currenciesListUrl}?page=${page}&pageSize=${pageSize}`)
+            yield this.apiRequest.getData(`${currenciesListUrl}?page=${page}&pageSize=${pageSize}`)
                 .then((result) => {
                 if (result.success) {
                     this.currencies = JSON.parse(result.value);
@@ -76,8 +77,7 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
     }
     loadCount() {
         return __awaiter(this, void 0, void 0, function* () {
-            let apiRequest = new ApiRequest();
-            yield apiRequest.getData(currenciesTotalCountUrl)
+            yield this.apiRequest.getData(currenciesTotalCountUrl)
                 .then((result) => {
                 if (result.success) {
                     this.totalCount = JSON.parse(result.value);

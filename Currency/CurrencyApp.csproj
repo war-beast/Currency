@@ -13,6 +13,7 @@
     <None Remove="Src\components\currenciesTable\currenciesTableRow.ts" />
     <None Remove="Src\exceptions\invalidArgumentException.ts" />
     <None Remove="Src\exceptions\requestException.ts" />
+    <None Remove="Src\models\account.ts" />
     <None Remove="Src\models\apiResult.ts" />
     <None Remove="Src\models\currency.ts" />
     <None Remove="Src\pages\login\init.ts" />
@@ -51,6 +52,7 @@
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTableRow.ts" />
     <TypeScriptCompile Include="Src\exceptions\invalidArgumentException.ts" />
     <TypeScriptCompile Include="Src\exceptions\requestException.ts" />
+    <TypeScriptCompile Include="Src\models\account.ts" />
     <TypeScriptCompile Include="Src\models\apiResult.ts" />
     <TypeScriptCompile Include="Src\models\currency.ts" />
     <TypeScriptCompile Include="Src\pages\login\init.ts" />

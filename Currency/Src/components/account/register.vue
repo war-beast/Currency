@@ -25,7 +25,7 @@
 					Пожалуйста введите подтверждение пароля
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+			<button type="button" class="btn btn-primary">Зарегистрироваться</button>
 		</form>
 	</div>
 </template>
