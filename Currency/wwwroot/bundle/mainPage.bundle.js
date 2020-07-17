@@ -3876,6 +3876,7 @@ let CurrenciesTable = class CurrenciesTable extends vue__WEBPACK_IMPORTED_MODULE
     }
     hideInfoModal() {
         this.isInfoVisible = false;
+        this.selectedCurrency = null;
     }
     loadData(page, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
