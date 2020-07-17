@@ -13,6 +13,9 @@ namespace CurrencyApp.BLL.Mapping
 			CreateMap<CurrencyDto, Currency>();
 			CreateMap<Currency, CurrencyDto>();
 
+			CreateMap<DailyRateDto, DailyRate>();
+			CreateMap<DailyRate, DailyRateDto>();
+
 			#endregion
 
 			#region business-logic and presentation
