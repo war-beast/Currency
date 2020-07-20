@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using CurrencyApp.BLL.Interfaces;
 
 namespace CurrencyApp.BLL.Dto
 {
-	public class CurrencyDto
+	public class CurrencyDto : ICurrencyRate
 	{
 		public string Id { get; set; }
 

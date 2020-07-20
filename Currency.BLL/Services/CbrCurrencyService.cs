@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CurrencyApp.BLL.Dto;
-using CurrencyApp.BLL.Extensions;
 using CurrencyApp.BLL.Interfaces;
 using CurrencyApp.DAL.Entity;
 using CurrencyApp.DAL.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CurrencyApp.BLL.Services
 {
@@ -50,7 +49,9 @@ namespace CurrencyApp.BLL.Services
 
 		public async Task CreateOrUpdate()
 		{
-			var currencies = await _currencyParsingService.GetParsed();
+			//Получаем фид, с обязательным указанием сегодняшней даты
+			//т.к. после 14:00 фид показывает курсы на следующий день
+			var currencies = await _currencyParsingService.GetParsed(DateTime.Today);
 
 			foreach (var currency in currencies.Currencies)
 			{
@@ -64,10 +65,10 @@ namespace CurrencyApp.BLL.Services
 				{
 					_unitOfWork.Currencies.Update(existCurrency);
 				}
-
-				//TODO: здесь надо проверить дату и заполнить историю курсов от последней записи до текущего дня
 				
 			}
+
+			//TODO: здесь надо проверить дату и заполнить историю курсов от последней записи до текущего дня
 
 			await _unitOfWork.Save();
 		}

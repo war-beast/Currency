@@ -20,6 +20,7 @@ namespace CurrencyApp
 
 			services.AddTransient<ICbrCurrencyParsingService, CbrCurrencyParsingService>();
 			services.AddTransient<ICbrCurrencyService, CbrCurrencyService>();
+			services.AddTransient<IDailyRatesService, DailyRatesService>();
 
 			#endregion
 

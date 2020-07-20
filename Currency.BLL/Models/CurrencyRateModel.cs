@@ -1,7 +1,6 @@
-﻿using System;
+﻿using CurrencyApp.BLL.Dto;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using CurrencyApp.BLL.Dto;
 
 namespace CurrencyApp.BLL.Models
 {
