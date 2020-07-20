@@ -13,8 +13,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Vue from "vue";
-import Component from "vue-class-component";
+import { Vue, Component } from "vue-property-decorator";
 import RowComponent from "Components/currenciesTable/currenciesTableRow.vue";
 import ApiRequest from "Util/request";
 const currenciesListUrl = "/api/common/currencies";

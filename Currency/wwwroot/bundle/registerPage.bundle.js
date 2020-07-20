@@ -434,11 +434,10 @@ class ApiRequest {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-class-component */ "./node_modules/vue-class-component/dist/vue-class-component.common.js");
-/* harmony import */ var vue_class_component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_class_component__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var Util_request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Util/request */ "./Src/util/request.ts");
-/* harmony import */ var Models_account__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! Models/account */ "./Src/models/account.ts");
+/* harmony import */ var vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-property-decorator */ "./node_modules/vue-property-decorator/lib/vue-property-decorator.umd.js");
+/* harmony import */ var vue_property_decorator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var Util_request__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! Util/request */ "./Src/util/request.ts");
+/* harmony import */ var Models_account__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! Models/account */ "./Src/models/account.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -456,9 +455,8 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
-
 const registerUrl = "/api/account/register";
-let RegisterComponent = class RegisterComponent extends vue__WEBPACK_IMPORTED_MODULE_0__["default"] {
+let RegisterComponent = class RegisterComponent extends vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__["Vue"] {
     constructor() {
         super();
         this.email = "";
@@ -467,7 +465,7 @@ let RegisterComponent = class RegisterComponent extends vue__WEBPACK_IMPORTED_MO
         this.formValid = true;
         this.isRegistrationSuccess = false;
         this.registerError = "";
-        this.apiRequest = new Util_request__WEBPACK_IMPORTED_MODULE_2__["default"]();
+        this.apiRequest = new Util_request__WEBPACK_IMPORTED_MODULE_1__["default"]();
     }
     register() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -477,7 +475,7 @@ let RegisterComponent = class RegisterComponent extends vue__WEBPACK_IMPORTED_MO
                 this.registerError = "Проверьте правильность заполнения полей формы!";
                 return;
             }
-            const loginModel = new Models_account__WEBPACK_IMPORTED_MODULE_3__["RegisterModel"](this.email, this.password, this.confirmPassword);
+            const loginModel = new Models_account__WEBPACK_IMPORTED_MODULE_2__["RegisterModel"](this.email, this.password, this.confirmPassword);
             yield this.apiRequest.postData(registerUrl, JSON.stringify(loginModel))
                 .then((result) => {
                 if (result.success) {
@@ -497,7 +495,7 @@ let RegisterComponent = class RegisterComponent extends vue__WEBPACK_IMPORTED_MO
     }
 };
 RegisterComponent = __decorate([
-    vue_class_component__WEBPACK_IMPORTED_MODULE_1___default.a
+    vue_property_decorator__WEBPACK_IMPORTED_MODULE_0__["Component"]
 ], RegisterComponent);
 /* harmony default export */ __webpack_exports__["default"] = (RegisterComponent);
 
