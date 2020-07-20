@@ -33,6 +33,7 @@ namespace CurrencyApp.BLL.Services
 
 		public async Task<CurrencyRateModel> GetParsed(DateTime? date = null)
 		{
+			//Формат даты в параметре ДД/ММ/ГГГГ
 			var dateParam = (date ?? DateTime.Today)
 				.ToString("d", CultureInfo.CreateSpecificCulture("fr-FR"));
 

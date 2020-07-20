@@ -16,6 +16,7 @@ namespace CurrencyApp.BLL.Services
 
 		private readonly IMapper _mapper;
 		private readonly ICbrCurrencyParsingService _currencyParsingService;
+		private readonly IDailyRatesService _dailyRatesService;
 
 		#endregion
 
@@ -23,10 +24,12 @@ namespace CurrencyApp.BLL.Services
 
 		public CbrCurrencyService(IUnitOfWork unitOfWork,
 			IMapper mapper,
-			ICbrCurrencyParsingService currencyParsingService) : base(unitOfWork)
+			ICbrCurrencyParsingService currencyParsingService, 
+			IDailyRatesService dailyRatesService) : base(unitOfWork)
 		{
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 			_currencyParsingService = currencyParsingService ?? throw new ArgumentNullException(nameof(currencyParsingService));
+			_dailyRatesService = dailyRatesService ?? throw new ArgumentNullException(nameof(dailyRatesService));
 		}
 
 
@@ -68,10 +71,46 @@ namespace CurrencyApp.BLL.Services
 				
 			}
 
-			//TODO: здесь надо проверить дату и заполнить историю курсов от последней записи до текущего дня
-
 			await _unitOfWork.Save();
+
+			//Если со дня обновления курсов прошло несколько дней,
+			//нужно заполнить историю всеми данными о курсах до текущего дня.
+			var lastUpdateDate = await GetLastUpdateDate();
+
+			var date = lastUpdateDate;
+			while (date <= DateTime.Today)
+			{
+				_dailyRatesService.AddToHistory(currencies.Currencies, date);
+				date = date.AddDays(1);
+			}
 		}
 
+		#region private methods
+
+		private async Task<DateTime> GetLastUpdateDate()
+		{
+			var lastRates = await Task.Run(() => _unitOfWork
+				.Currencies
+				.GetAll()
+				.Select(x => x.DayRates.OrderByDescending(y => y.Date)
+					.FirstOrDefault())
+				.Where(x => x != null)
+				.ToList());
+
+			if (lastRates.Any())
+			{
+				//Ориентируемся по самой последней дате.
+				//Если какая-то валюта перестала обновляться, значит валюта стала не актуальной (удалена из списков валют).
+				return lastRates
+					.Select(x => x.Date)
+					.Max();
+			}
+			else
+			{
+				return DateTime.Today;
+			}
+		}
+
+		#endregion
 	}
 }

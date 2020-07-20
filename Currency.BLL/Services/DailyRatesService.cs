@@ -1,11 +1,10 @@
-﻿using CurrencyApp.BLL.Dto;
-using CurrencyApp.BLL.Interfaces;
+﻿using CurrencyApp.BLL.Interfaces;
+using CurrencyApp.DAL.Entity;
 using CurrencyApp.DAL.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CurrencyApp.DAL.Entity;
 
 namespace CurrencyApp.BLL.Services
 {
@@ -19,7 +18,7 @@ namespace CurrencyApp.BLL.Services
 
 		#endregion
 
-		public async Task AddToHistory(IEnumerable<ICurrencyRate> currencies, DateTime checkingDate)
+		public void AddToHistory(IEnumerable<ICurrencyRate> currencies, DateTime checkingDate)
 		{
 			#region validation
 
@@ -45,6 +44,8 @@ namespace CurrencyApp.BLL.Services
 					});
 				}
 			}
+
+			Task.Run(async () => await _unitOfWork.Save());
 		}
 	}
 }
