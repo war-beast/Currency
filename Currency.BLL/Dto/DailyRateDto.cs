@@ -10,7 +10,7 @@ namespace CurrencyApp.BLL.Dto
 
 		public float Rate { get; set; }
 
-		public DateTime Date { get; set; }
+		public string Date { get; set; }
 
 		public CurrencyDto Currency { get; set; }
 	}

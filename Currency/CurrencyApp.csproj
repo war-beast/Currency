@@ -47,10 +47,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\bundle\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <TypeScriptCompile Include="Src\components\account\login.ts" />
     <TypeScriptCompile Include="Src\components\account\register.ts" />
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTable.ts" />

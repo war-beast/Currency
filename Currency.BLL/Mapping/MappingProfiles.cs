@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using CurrencyApp.BLL.Dto;
 using CurrencyApp.DAL.Entity;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CurrencyApp.BLL.Mapping
 {
@@ -13,8 +15,10 @@ namespace CurrencyApp.BLL.Mapping
 			CreateMap<CurrencyDto, Currency>();
 			CreateMap<Currency, CurrencyDto>();
 
-			CreateMap<DailyRateDto, DailyRate>();
-			CreateMap<DailyRate, DailyRateDto>();
+			CreateMap<DailyRateDto, DailyRate>()
+				.ForMember(s => s.Date, opt => opt.MapFrom(dto => DateTime.Parse(dto.Date)));
+			CreateMap<DailyRate, DailyRateDto>()
+				.ForMember(s => s.Date, opt => opt.MapFrom(core => core.Date.ToShortDateString()));
 
 			#endregion
 

@@ -1940,7 +1940,11 @@ var render = function() {
                                 staticClass: "col-form-label font-weight-bold",
                                 attrs: { for: "nameCaption" }
                               },
-                              [_vm._v("Курс (руб. за ед.):")]
+                              [
+                                _vm._v(
+                                  "Последнее значение курса (руб. за ед.):"
+                                )
+                              ]
                             ),
                             _vm._v(" "),
                             _c("span", { attrs: { id: "nameCaption" } }, [
@@ -1949,6 +1953,32 @@ var render = function() {
                           ])
                         ]
                       )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.selectedCurrency != null
+                    ? _c("div", [
+                        _c("h5", { staticClass: "h5" }, [
+                          _vm._v("История курсов")
+                        ]),
+                        _vm._v(" "),
+                        _c("table", [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.selectedCurrency.dayRates, function(
+                              item
+                            ) {
+                              return _c("tr", [
+                                _c("td", [_vm._v(_vm._s(item.date))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(item.rate))])
+                              ])
+                            }),
+                            0
+                          )
+                        ])
+                      ])
                     : _vm._e()
                 ])
               ]),
@@ -1983,6 +2013,18 @@ var staticRenderFns = [
         _c("th", [_vm._v("Наименование")]),
         _vm._v(" "),
         _c("th", [_vm._v("Курс")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Дата")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Курс (руб. за ед.)")])
       ])
     ])
   }
