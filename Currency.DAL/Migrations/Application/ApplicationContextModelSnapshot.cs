@@ -19,7 +19,7 @@ namespace CurrencyApp.DAL.Migrations.Application
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CurrencyApp.DAL.Entity.Currency", b =>
+            modelBuilder.Entity("CurrencyApp.DAL.Entity.Currencies", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -59,7 +59,7 @@ namespace CurrencyApp.DAL.Migrations.Application
 
             modelBuilder.Entity("CurrencyApp.DAL.Entity.DailyRate", b =>
                 {
-                    b.HasOne("CurrencyApp.DAL.Entity.Currency", "Currency")
+                    b.HasOne("CurrencyApp.DAL.Entity.Currencies", "Currencies")
                         .WithMany("DayRates")
                         .HasForeignKey("CurrencyId")
                         .OnDelete(DeleteBehavior.Cascade);

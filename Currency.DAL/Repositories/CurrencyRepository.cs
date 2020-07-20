@@ -29,7 +29,7 @@ namespace CurrencyApp.DAL.Repositories
 
 			return _db.Currencies
 				.Include(x => x.DayRates)
-				.First(x => x.Id == id);
+				.First(x => x.Id.Equals(id));
 		}
 
 		public IEnumerable<Currency> GetAll()
