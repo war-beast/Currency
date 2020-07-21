@@ -59,7 +59,9 @@ let configuration = {
 			Components: path.resolve(__dirname, "./Src/components/"),
 			Models: path.resolve(__dirname, "./Src/models/"),
 			Exceptions: path.resolve(__dirname, "./Src/exceptions/"),
-			Util: path.resolve(__dirname, "./Src/util/")
+			Util: path.resolve(__dirname, "./Src/util/"),
+			Interfaces: path.resolve(__dirname, "./Src/interfaces/"),
+			Modules: path.resolve(__dirname, "./Src/modules/")
 		}
 	},
 	module: {

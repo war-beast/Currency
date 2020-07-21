@@ -13,7 +13,9 @@
 		"paths": {
 			"Models/*": [ "models/*" ],
 			"Exceptions/*": [ "exceptions/*" ],
-			"Util/*": [ "util/*" ]
+			"Util/*": [ "util/*" ],
+			"Interfaces/*": [ "interfaces/*" ],
+			"Modules/*": [ "modules/*" ]
 		}
 	},
 	"exclude": [

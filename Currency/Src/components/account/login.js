@@ -18,6 +18,8 @@ import Component from "vue-class-component";
 import ApiRequest from "Util/request";
 import { LoginModel } from "Models/account";
 import Cookies from "cookies-ts";
+import { State, Action, Getter } from "vuex-class";
+const namespace = "profile";
 const loginUrl = "/api/account/token";
 let LoginComponent = class LoginComponent extends Vue {
     constructor() {
@@ -27,9 +29,11 @@ let LoginComponent = class LoginComponent extends Vue {
         this.rememberMe = false;
         this.formValid = true;
         this.loginError = "";
-        this.userName = "";
         this.apiRequest = new ApiRequest();
     }
+    //@myNamespace.State("profile") profile: IProfileState;
+    //@myNamespace.Action("logIn") logUserIn: any;
+    //@myNamespace.Getter("userEmail") userName: string;
     logIn() {
         return __awaiter(this, void 0, void 0, function* () {
             this.loginError = "";
@@ -45,6 +49,10 @@ let LoginComponent = class LoginComponent extends Vue {
                     const cookies = new Cookies();
                     const apiResponse = (result.value);
                     cookies.set(globalAccessToken, apiResponse.access_token, { expires: "100d" });
+                    const user = {
+                        email: apiResponse.username
+                    };
+                    this.logUserIn(user);
                     this.userName = apiResponse.username;
                 }
                 else {
@@ -58,6 +66,15 @@ let LoginComponent = class LoginComponent extends Vue {
             && this.password !== "";
     }
 };
+__decorate([
+    State("profile")
+], LoginComponent.prototype, "profile", void 0);
+__decorate([
+    Action("logUserIn", { namespace: namespace })
+], LoginComponent.prototype, "logUserIn", void 0);
+__decorate([
+    Getter("userEmail", { namespace: namespace })
+], LoginComponent.prototype, "userName", void 0);
 LoginComponent = __decorate([
     Component
 ], LoginComponent);

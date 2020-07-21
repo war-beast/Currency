@@ -3,8 +3,11 @@ import Component from "vue-class-component";
 import ApiRequest from "Util/request";
 import { ApiResult } from "Models/apiResult";
 import { LoginModel, TokenResult } from "Models/account";
-import Cookies from "cookies-ts"
+import Cookies from "cookies-ts";
+import { State, Action, Getter } from "vuex-class";
+import { IProfileState, IUser } from "Interfaces/profile/types";
 
+const namespace = "profile";
 const loginUrl = "/api/account/token";
 
 @Component
@@ -15,7 +18,6 @@ export default class LoginComponent extends Vue {
 
 	private formValid: boolean = true;
 	private loginError: string = "";
-	private userName: string = "";
 	private readonly apiRequest: ApiRequest;
 
 	constructor() {
@@ -24,6 +26,9 @@ export default class LoginComponent extends Vue {
 		this.apiRequest = new ApiRequest();
 	}
 
+	@State("profile") profile: IProfileState;
+	@Action("logUserIn", { namespace: namespace }) logUserIn: any;
+	@Getter("userEmail", { namespace: namespace }) userName: string;
 
 	private async logIn() {
 		this.loginError = "";
@@ -41,7 +46,10 @@ export default class LoginComponent extends Vue {
 					const cookies = new Cookies();
 					const apiResponse = ((result.value) as any) as TokenResult;
 					cookies.set(globalAccessToken, apiResponse.access_token, { expires: "100d" });
-					this.userName = apiResponse.username;
+					const user = {
+						email: apiResponse.username
+					};
+					this.logUserIn(user);
 				} else {
 					this.loginError = `Не удалось войти по логину: ${this.email}`;
 				}
