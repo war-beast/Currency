@@ -20,7 +20,7 @@ namespace CurrencyApp.DAL.Migrations.Application
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CurrencyApp.DAL.Entity.Currency", b =>
+            modelBuilder.Entity("CurrencyApp.DAL.Entity.Currencies", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");

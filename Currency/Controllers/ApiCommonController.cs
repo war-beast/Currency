@@ -53,7 +53,8 @@ namespace CurrencyApp.Controllers
 
 			return Ok(JsonConvert.SerializeObject(result, Formatting.None, new JsonSerializerSettings
 			{
-				ContractResolver = new CamelCasePropertyNamesContractResolver()
+				ContractResolver = new CamelCasePropertyNamesContractResolver(),
+				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
 			}));
 		}
 
@@ -79,7 +80,8 @@ namespace CurrencyApp.Controllers
 
 			return Ok(JsonConvert.SerializeObject(currencyDetails, Formatting.None, new JsonSerializerSettings
 			{
-				ContractResolver = new CamelCasePropertyNamesContractResolver()
+				ContractResolver = new CamelCasePropertyNamesContractResolver(),
+				ReferenceLoopHandling = ReferenceLoopHandling.Ignore
 			}));
 		}
 

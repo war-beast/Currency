@@ -12,7 +12,7 @@ namespace CurrencyApp
 		{
 			#region data level
 
-			services.AddTransient<IUnitOfWork, UnitOfWork>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 			#endregion
 
@@ -20,6 +20,7 @@ namespace CurrencyApp
 
 			services.AddTransient<ICbrCurrencyParsingService, CbrCurrencyParsingService>();
 			services.AddTransient<ICbrCurrencyService, CbrCurrencyService>();
+			services.AddTransient<IDailyRatesService, DailyRatesService>();
 
 			#endregion
 

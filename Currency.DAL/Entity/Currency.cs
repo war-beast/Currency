@@ -1,4 +1,6 @@
-﻿namespace CurrencyApp.DAL.Entity
+﻿using System.Collections.Generic;
+
+namespace CurrencyApp.DAL.Entity
 {
 	public class Currency
 	{
@@ -7,5 +9,7 @@
 		public string Name { get; set; }
 
 		public float Rate { get; set; }
+
+		public IEnumerable<DailyRate> DayRates { get; set; }
 	}
 }

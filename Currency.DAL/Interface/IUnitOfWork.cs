@@ -5,7 +5,9 @@ namespace CurrencyApp.DAL.Interface
 {
 	public interface IUnitOfWork
 	{
-		IRepository<Currency> CurrencyRepository { get; }
+		IRepository<Currency> Currencies { get; }
+
+		IRepository<DailyRate> DailyRates { get; }
 
 		Task Save();
 	}

@@ -54,9 +54,26 @@
 									<span id="nameCaption">{{selectedCurrency.name}}</span>
 								</div>
 								<div>
-									<label for="nameCaption" class="col-form-label font-weight-bold">Курс (руб. за ед.):</label>
+									<label for="nameCaption" class="col-form-label font-weight-bold">Последнее значение курса (руб. за ед.):</label>
 									<span id="nameCaption">{{selectedCurrency.rate}}</span>
 								</div>
+							</div>
+							<div v-if="selectedCurrency != null">
+								<h5 class="h5">История курсов</h5>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Дата</th>
+											<th>Курс (руб. за ед.)</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="item in selectedCurrency.dayRates">
+											<td>{{item.date}}</td>
+											<td>{{item.rate}}</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>

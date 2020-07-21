@@ -1,6 +1,7 @@
 ﻿using CurrencyApp.DAL.DataContext;
 using CurrencyApp.DAL.Entity;
 using CurrencyApp.DAL.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +27,15 @@ namespace CurrencyApp.DAL.Repositories
 
 			#endregion
 
-			return _db.Currencies.First(x => x.Id == id);
+			return _db.Currencies
+				.Include(x => x.DayRates)
+				.First(x => x.Id.Equals(id));
 		}
 
 		public IEnumerable<Currency> GetAll()
 		{
-			return _db.Currencies;
+			return _db.Currencies
+				.Include(x => x.DayRates);
 		}
 
 		public void Create(Currency item)
