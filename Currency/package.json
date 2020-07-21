@@ -29,7 +29,9 @@
 		"webpack-cli": "^3.3.7",
 		"webpack-dev-server": "^2.9.4",
 		"webpack-merge": "^4.2.2",
-		"cookies-ts": "^1.0.5"
+		"cookies-ts": "^1.0.5",
+		"vuex": "^3.5.1",
+		"vuex-class": "^0.3.2"
 	},
 	"scripts": {
 		"webpack-script": "webpack --config webpack.dev.js"
@@ -41,6 +43,7 @@
 	},
 	"author": "Sharapov Vladimir",
 	"dependencies": {
-		"cookies-ts": "^1.0.5"
+		"cookies-ts": "^1.0.5",
+		"vuex": "^3.5.1"
 	}
 }
