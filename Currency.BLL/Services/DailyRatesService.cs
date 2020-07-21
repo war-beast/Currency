@@ -44,8 +44,6 @@ namespace CurrencyApp.BLL.Services
 					});
 				}
 			}
-
-			Task.Run(async () => await _unitOfWork.Save());
 		}
 	}
 }

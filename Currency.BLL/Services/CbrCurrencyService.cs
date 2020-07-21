@@ -66,23 +66,23 @@ namespace CurrencyApp.BLL.Services
 				}
 				else
 				{
-					_unitOfWork.Currencies.Update(existCurrency);
+					_unitOfWork.Currencies.Update(_mapper.Map<Currency>(currency));
 				}
 				
 			}
 
-			await _unitOfWork.Save();
-
-			//Если со дня обновления курсов прошло несколько дней,
+			//Если со дня предыдущего обновления курсов прошло несколько дней,
 			//нужно заполнить историю всеми данными о курсах до текущего дня.
 			var lastUpdateDate = await GetLastUpdateDate();
 
-			var date = lastUpdateDate;
+			var date = lastUpdateDate.AddDays(1);
 			while (date <= DateTime.Today)
 			{
 				_dailyRatesService.AddToHistory(currencies.Currencies, date);
 				date = date.AddDays(1);
 			}
+
+			await _unitOfWork.Save();
 		}
 
 		#region private methods
