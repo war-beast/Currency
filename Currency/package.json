@@ -27,7 +27,7 @@
 		"webpack": "^4.39.3",
 		"webpack-bundle-analyzer": "^3.4.1",
 		"webpack-cli": "^3.3.7",
-		"webpack-dev-server": "^2.9.4",
+		"webpack-dev-server": "^3.1.11",
 		"webpack-merge": "^4.2.2",
 		"cookies-ts": "^1.0.5"
 	},
