@@ -16,7 +16,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { Vue, Component } from "vue-property-decorator";
 import RowComponent from "Components/currenciesTable/currenciesTableRow.vue";
 import ApiRequest from "Util/request";
-import { Action } from "vuex-class";
+import { Action, Getter } from "vuex-class";
 const currenciesListUrl = "/api/common/currencies";
 const currenciesTotalCountUrl = "/api/common/currencyCount";
 const currencyDetails = "/api/common/currency";
@@ -30,7 +30,6 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
         this.visibleRowCount = 5;
         this.page = 1;
         this.isInfoVisible = false;
-        this.isUserAuthorized = true;
         this.apiRequest = new ApiRequest();
         setTimeout(() => {
             this.loadCount();
@@ -62,7 +61,6 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
     }
     logOut(authorizationResultError) {
         if (authorizationResultError.indexOf("401") !== -1) {
-            this.isUserAuthorized = false;
             this.logUserOut();
         }
     }
@@ -103,6 +101,9 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
 __decorate([
     Action("logUserOut", { namespace: globalProfileNamespace })
 ], CurrenciesTable.prototype, "logUserOut", void 0);
+__decorate([
+    Getter("isLogged", { namespace: globalProfileNamespace })
+], CurrenciesTable.prototype, "isLogged", void 0);
 CurrenciesTable = __decorate([
     Component({
         components: {

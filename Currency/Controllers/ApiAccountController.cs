@@ -16,6 +16,7 @@ namespace CurrencyApp.Controllers
 {
 	[Route("api/account")]
 	[ApiController]
+	[Authorize]
 	public class ApiAccountController : ControllerBase
 	{
 		#region private members
@@ -35,6 +36,14 @@ namespace CurrencyApp.Controllers
 		}
 
 		#endregion
+
+		[HttpGet]
+		[Route("logout")]
+		public async Task<IActionResult> Logout()
+		{
+			await _signManager.SignOutAsync();
+			return Ok();
+		}
 
 		[AllowAnonymous]
 		[Route("register")]
@@ -136,7 +145,7 @@ namespace CurrencyApp.Controllers
 			#endregion
 
 			var userRoles = await _userManager.GetRolesAsync(user);
-			var result = await _signManager.PasswordSignInAsync(email, password, true, false);
+			var result = await _signManager.PasswordSignInAsync(email, password, isPersistent, false);
 
 			if (!result.Succeeded)
 				return null;

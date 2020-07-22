@@ -3,7 +3,7 @@ import RowComponent from "Components/currenciesTable/currenciesTableRow.vue";
 import { Currency } from "Models/currency";
 import { ApiResult } from "Models/apiResult";
 import ApiRequest from "Util/request";
-import { Action } from "vuex-class";
+import { Action, Getter } from "vuex-class";
 
 const currenciesListUrl = "/api/common/currencies";
 const currenciesTotalCountUrl = "/api/common/currencyCount";
@@ -22,7 +22,6 @@ export default class CurrenciesTable extends Vue {
 	private visibleRowCount: number = 5;
 	private page: number = 1;
 	private isInfoVisible: boolean = false;
-	private isUserAuthorized: boolean = true;
 
 	private readonly apiRequest: ApiRequest;
 
@@ -37,6 +36,7 @@ export default class CurrenciesTable extends Vue {
 	}
 
 	@Action("logUserOut", { namespace: globalProfileNamespace }) logUserOut: any;
+	@Getter("isLogged", { namespace: globalProfileNamespace }) isLogged: boolean;
 
 	public showPrevious() {
 		if (this.page > 1)
@@ -64,7 +64,6 @@ export default class CurrenciesTable extends Vue {
 
 	private logOut(authorizationResultError: string): void {
 		if (authorizationResultError.indexOf("401") !== -1) {
-			this.isUserAuthorized = false;
 			this.logUserOut();
 		}
 	}
