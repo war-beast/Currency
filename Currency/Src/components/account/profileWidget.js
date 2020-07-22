@@ -15,62 +15,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import Vue from "vue";
 import Component from "vue-class-component";
-import ApiRequest from "Util/request";
-import { LoginModel } from "Models/account";
-import Cookies from "cookies-ts";
 import { Action, Getter } from "vuex-class";
-import { User } from "Models/account";
-const loginUrl = "/api/account/token";
-let LoginComponent = class LoginComponent extends Vue {
+import ApiRequest from "Util/request";
+import Cookies from "cookies-ts";
+const logoutUrl = "/api/account/logout";
+let ProfileWidget = class ProfileWidget extends Vue {
     constructor() {
         super();
-        this.email = "";
-        this.password = "";
-        this.rememberMe = false;
-        this.formValid = true;
-        this.loginError = "";
         this.apiRequest = new ApiRequest();
     }
-    logIn() {
+    logOut() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.loginError = "";
-            this.formValid = this.checkValid();
-            if (!this.formValid) {
-                this.loginError = "Необходимо заполнить все поля формы!";
-                return;
-            }
-            const loginModel = new LoginModel(this.email, this.password, this.rememberMe);
-            yield this.apiRequest.postData(loginUrl, JSON.stringify(loginModel))
+            yield this.apiRequest.getData(logoutUrl)
                 .then((result) => {
                 if (result.success) {
                     const cookies = new Cookies();
-                    const apiResponse = (result.value);
-                    cookies.set(globalAccessToken, apiResponse.access_token, { expires: "100d" });
-                    const user = new User(apiResponse.username);
-                    this.logUserIn(user);
-                }
-                else {
-                    this.loginError = `Не удалось войти по логину: ${this.email}`;
+                    cookies.remove(globalAccessToken);
+                    this.logUserOut();
                 }
             });
         });
     }
-    checkValid() {
-        return this.email !== ""
-            && this.password !== "";
-    }
 };
 __decorate([
-    Action("logUserIn", { namespace: globalProfileNamespace })
-], LoginComponent.prototype, "logUserIn", void 0);
+    Action("logUserOut", { namespace: globalProfileNamespace })
+], ProfileWidget.prototype, "logUserOut", void 0);
 __decorate([
     Getter("userEmail", { namespace: globalProfileNamespace })
-], LoginComponent.prototype, "userEmail", void 0);
+], ProfileWidget.prototype, "userEmail", void 0);
 __decorate([
     Getter("isLogged", { namespace: globalProfileNamespace })
-], LoginComponent.prototype, "isLogged", void 0);
-LoginComponent = __decorate([
+], ProfileWidget.prototype, "isLogged", void 0);
+ProfileWidget = __decorate([
     Component
-], LoginComponent);
-export default LoginComponent;
-//# sourceMappingURL=login.js.map
+], ProfileWidget);
+export default ProfileWidget;
+;
+//# sourceMappingURL=profileWidget.js.map

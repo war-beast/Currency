@@ -1,8 +1,8 @@
 ﻿import Vue from "vue";
-import TableComponent from "Components/currenciesTable/currenciesTable.vue";
+import ProfileWidget from "Components/account/profileWidget.vue";
 import store from "Modules/store";
 
-class AppCore {
+class App {
 	private instance: Vue;
 
 	constructor() {
@@ -11,11 +11,11 @@ class AppCore {
 
 	private init() {
 		this.instance = new Vue({
-			el: "#vue-app-container",
-			render: (h: any) => h(TableComponent),
+			el: "#vue-profile-widget",
+			render: (h: any) => h(ProfileWidget),
 			store
 		});
 	}
 }
 
-new AppCore();
+new App();

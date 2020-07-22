@@ -3,6 +3,7 @@ import RowComponent from "Components/currenciesTable/currenciesTableRow.vue";
 import { Currency } from "Models/currency";
 import { ApiResult } from "Models/apiResult";
 import ApiRequest from "Util/request";
+import { Action, Getter } from "vuex-class";
 
 const currenciesListUrl = "/api/common/currencies";
 const currenciesTotalCountUrl = "/api/common/currencyCount";
@@ -21,7 +22,6 @@ export default class CurrenciesTable extends Vue {
 	private visibleRowCount: number = 5;
 	private page: number = 1;
 	private isInfoVisible: boolean = false;
-	private isUserAuthorized: boolean = true;
 
 	private readonly apiRequest: ApiRequest;
 
@@ -34,6 +34,9 @@ export default class CurrenciesTable extends Vue {
 			this.loadData(this.page, this.visibleRowCount);
 		}, 0);
 	}
+
+	@Action("logUserOut", { namespace: globalProfileNamespace }) logUserOut: any;
+	@Getter("isLogged", { namespace: globalProfileNamespace }) isLogged: boolean;
 
 	public showPrevious() {
 		if (this.page > 1)
@@ -54,10 +57,15 @@ export default class CurrenciesTable extends Vue {
 				} else {
 					console.log(`Ошибка загрузки данных по url: ${currencyDetails}`);
 
-					if (result.value.indexOf("401") !== -1)
-						this.isUserAuthorized = false;
+					this.logOut(result.value);
 				}
 			});
+	}
+
+	private logOut(authorizationResultError: string): void {
+		if (authorizationResultError.indexOf("401") !== -1) {
+			this.logUserOut();
+		}
 	}
 
 	private hideInfoModal(): void {
@@ -73,8 +81,7 @@ export default class CurrenciesTable extends Vue {
 				} else {
 					console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
 
-					if (result.value.indexOf("401") !== -1)
-						this.isUserAuthorized = false;
+					this.logOut(result.value);
 				}
 			});
 	}
@@ -87,6 +94,7 @@ export default class CurrenciesTable extends Vue {
 					this.pageCount = Math.ceil(this.totalCount / this.visibleRowCount);
 				} else {
 					console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
+					this.logOut(result.value);
 				}
 			});
 	}

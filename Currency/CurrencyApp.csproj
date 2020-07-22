@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Remove="Src\components\account\login.ts" />
+    <None Remove="Src\components\account\profileWidget.ts" />
     <None Remove="Src\components\account\register.ts" />
     <None Remove="Src\components\currenciesTable\currenciesTable.ts" />
     <None Remove="Src\components\currenciesTable\currenciesTableRow.ts" />
@@ -27,9 +28,9 @@
     <None Remove="Src\modules\profile\index.ts" />
     <None Remove="Src\modules\profile\mutations.ts" />
     <None Remove="Src\pages\login\init.ts" />
-    <None Remove="Src\pages\login\store.ts" />
     <None Remove="Src\pages\main\init.ts" />
     <None Remove="Src\pages\register\init.ts" />
+    <None Remove="Src\pages\shared\profileWidget.ts" />
     <None Remove="Src\util\request.ts" />
   </ItemGroup>
 
@@ -54,6 +55,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="Src\components\account\login.ts" />
+    <TypeScriptCompile Include="Src\components\account\profileWidget.ts" />
     <TypeScriptCompile Include="Src\components\account\register.ts" />
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTable.ts" />
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTableRow.ts" />
@@ -67,11 +69,15 @@
     <TypeScriptCompile Include="Src\modules\profile\index.ts" />
     <TypeScriptCompile Include="Src\modules\profile\mutations.ts" />
     <TypeScriptCompile Include="Src\pages\login\init.ts" />
-    <TypeScriptCompile Include="Src\pages\login\store.ts" />
     <TypeScriptCompile Include="Src\pages\main\init.ts" />
     <TypeScriptCompile Include="Src\pages\register\init.ts" />
     <TypeScriptCompile Include="Src\interfaces\profile\types.ts" />
+    <TypeScriptCompile Include="Src\pages\shared\profileWidget.ts" />
     <TypeScriptCompile Include="Src\util\request.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\bundle\" />
   </ItemGroup>
 
 </Project>

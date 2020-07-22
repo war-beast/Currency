@@ -1,4 +1,6 @@
-﻿export class RegisterModel {
+﻿import { IUser } from "Interfaces/profile/types";
+
+export class RegisterModel {
 	private email: string;
 	private password: string;
 	private confirmPassword: string;
@@ -29,5 +31,13 @@ export class TokenResult {
 	constructor(access_token: string, username: string) {
 		this.access_token = access_token;
 		this.username = username;
+	}
+}
+
+export class User implements IUser {
+	email: string;
+
+	constructor(email: string) {
+		this.email = email;
 	}
 }

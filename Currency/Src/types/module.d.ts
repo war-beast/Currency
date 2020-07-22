@@ -4,3 +4,4 @@
 }
 
 declare var globalAccessToken: string;
+declare var globalProfileNamespace: string;

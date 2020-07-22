@@ -3,3 +3,4 @@
 
 // Write your JavaScript code.
 var globalAccessToken = "access_token";
+var globalProfileNamespace = "profile";

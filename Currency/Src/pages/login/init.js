@@ -1,6 +1,6 @@
 import Vue from "vue";
 import LoginComponent from "Components/account/login.vue";
-import store from "./store";
+import store from "Modules/store";
 new Vue({
     el: "#vue-account-container",
     render: (h) => h(LoginComponent),

@@ -19,4 +19,9 @@ export class TokenResult {
         this.username = username;
     }
 }
+export class User {
+    constructor(email) {
+        this.email = email;
+    }
+}
 //# sourceMappingURL=account.js.map

@@ -1,28 +1,16 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
+import { profile } from "Modules/profile/index";
+import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
-export default new Vuex.Store({
+const store = {
     state: {
-        user: undefined,
-        error: false
+        version: "1.0.0" // a simple property
     },
-    mutations: {
-        PROFILE_LOADED(state, payload) {
-            state.error = false;
-            state.user = payload;
-        }
+    modules: {
+        profile
     },
-    actions: {
-        addToDo(context, user) {
-            context.commit("PROFILE_LOADED", user);
-        }
-    },
-    getters: {
-        userName(state) {
-            const { user } = state;
-            const email = (user && user.email) || "";
-            return email;
-        }
-    }
-});
+    plugins: [createPersistedState()]
+};
+export default new Vuex.Store(store);
 //# sourceMappingURL=store.js.map

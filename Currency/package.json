@@ -9,6 +9,7 @@
 		"babel-preset-env": "^1.6.0",
 		"clean-webpack-plugin": "^0.1.19",
 		"concurrently": "^3.5.0",
+		"cookies-ts": "^1.0.5",
 		"cross-env": "^5.0.5",
 		"css-loader": "^0.28.7",
 		"file-loader": "^1.1.4",
@@ -19,19 +20,19 @@
 		"typescript": "^2.6.1",
 		"uglifyjs-webpack-plugin": "^2.2.0",
 		"vue": "^2.3.3",
-		"vue-class-component": "^5.0.1",
+		"vue-class-component": "^7.0.0",
 		"vue-loader": "^15.7.1",
 		"vue-property-decorator": "^5.0.1",
 		"vue-style-loader": "^4.1.0",
 		"vue-template-compiler": "^2.6.10",
+		"vuex": "^3.5.1",
+		"vuex-class": "^0.3.2",
+		"vuex-persistedstate": "^3.0.1",
 		"webpack": "^4.39.3",
 		"webpack-bundle-analyzer": "^3.4.1",
 		"webpack-cli": "^3.3.7",
 		"webpack-dev-server": "^3.1.11",
-		"webpack-merge": "^4.2.2",
-		"cookies-ts": "^1.0.5",
-		"vuex": "^3.5.1",
-		"vuex-class": "^0.3.2"
+		"webpack-merge": "^4.2.2"
 	},
 	"scripts": {
 		"webpack-script": "webpack --config webpack.dev.js"
@@ -44,6 +45,8 @@
 	"author": "Sharapov Vladimir",
 	"dependencies": {
 		"cookies-ts": "^1.0.5",
-		"vuex": "^3.5.1"
+		"vuex": "^3.5.1",
+		"vuex-class": "^0.3.2",
+		"vuex-persistedstate": "^3.0.1"
 	}
 }

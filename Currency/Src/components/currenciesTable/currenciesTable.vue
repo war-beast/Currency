@@ -1,6 +1,6 @@
 ﻿<template>
 	<div class="container-fluid">
-		<div class="row d-flex flex-wrap justify-content-between align-items-center my-4">
+		<div class="row d-flex flex-wrap justify-content-between align-items-center my-4" v-if="isLogged">
 			<div>
 				Всего: {{totalCount}} записей
 			</div>
@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="table-responsive">
-			<table class="table table-hover" v-if="isUserAuthorized">
+			<table class="table table-hover" v-if="isLogged">
 				<thead>
 					<tr>
 						<th>Id</th>
