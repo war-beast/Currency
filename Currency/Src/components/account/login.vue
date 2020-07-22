@@ -1,6 +1,6 @@
 ﻿<template>
 	<div class="row">
-		<section v-if="userName === ''">
+		<section v-if="!userLogged">
 			<form v-bind:class="{ 'was-validated': !formValid }">
 				<h4>Введите данные учётной записи для входа.</h4>
 				<hr />
@@ -36,7 +36,7 @@
 			</form>
 		</section>
 		<section v-else>
-			Вы вошли успешно с Email {{userName}}, теперь можно вернуться на <a href="/">главную страницу</a>.
+			Вы вошли успешно с Email {{userEmail}}, теперь можно вернуться на <a href="/">главную страницу</a>.
 		</section>
 	</div>
 </template>

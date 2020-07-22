@@ -5,7 +5,7 @@ import { ApiResult } from "Models/apiResult";
 import { LoginModel, TokenResult } from "Models/account";
 import Cookies from "cookies-ts";
 import { State, Action, Getter } from "vuex-class";
-import { IProfileState, IUser } from "Interfaces/profile/types";
+import { IProfileState } from "Interfaces/profile/types";
 
 const namespace = "profile";
 const loginUrl = "/api/account/token";
@@ -20,15 +20,18 @@ export default class LoginComponent extends Vue {
 	private loginError: string = "";
 	private readonly apiRequest: ApiRequest;
 
+	private userEmail: string = "";
+	private userLogged: boolean = false;
+
 	constructor() {
 		super();
 
 		this.apiRequest = new ApiRequest();
 	}
 
-	@State("profile") profile: IProfileState;
-	@Action("logUserIn", { namespace: namespace }) logUserIn: any;
-	@Getter("userEmail", { namespace: namespace }) userName: string;
+	//@State("profile") profile: IProfileState;
+	//@Action("logUserIn", { namespace: namespace }) logUserIn: any;
+	//@Getter("userEmail", { namespace: namespace }) userEmail: string;
 
 	private async logIn() {
 		this.loginError = "";
@@ -49,7 +52,7 @@ export default class LoginComponent extends Vue {
 					const user = {
 						email: apiResponse.username
 					};
-					this.logUserIn(user);
+					//this.logUserIn(user);
 				} else {
 					this.loginError = `Не удалось войти по логину: ${this.email}`;
 				}
@@ -59,5 +62,10 @@ export default class LoginComponent extends Vue {
 	private checkValid(): boolean {
 		return this.email !== ""
 			&& this.password !== "";
+	}
+
+	mounted() {
+		//this.userEmail = vxm.user.userEmail;
+		//this.userLogged = vxm.user.userLogged;
 	}
 }

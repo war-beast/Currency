@@ -27,7 +27,6 @@
     <None Remove="Src\modules\profile\index.ts" />
     <None Remove="Src\modules\profile\mutations.ts" />
     <None Remove="Src\pages\login\init.ts" />
-    <None Remove="Src\pages\login\store.ts" />
     <None Remove="Src\pages\main\init.ts" />
     <None Remove="Src\pages\register\init.ts" />
     <None Remove="Src\util\request.ts" />
@@ -67,7 +66,6 @@
     <TypeScriptCompile Include="Src\modules\profile\index.ts" />
     <TypeScriptCompile Include="Src\modules\profile\mutations.ts" />
     <TypeScriptCompile Include="Src\pages\login\init.ts" />
-    <TypeScriptCompile Include="Src\pages\login\store.ts" />
     <TypeScriptCompile Include="Src\pages\main\init.ts" />
     <TypeScriptCompile Include="Src\pages\register\init.ts" />
     <TypeScriptCompile Include="Src\interfaces\profile\types.ts" />
