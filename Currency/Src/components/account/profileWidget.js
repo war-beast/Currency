@@ -27,6 +27,6 @@ __decorate([
 ProfileWidget = __decorate([
     Component
 ], ProfileWidget);
-export { ProfileWidget };
+export default ProfileWidget;
 ;
 //# sourceMappingURL=profileWidget.js.map

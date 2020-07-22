@@ -1,5 +1,4 @@
-﻿import Vue from "Vue";
-import axios from "axios";
+﻿import axios from "axios";
 import RequestException from "Exceptions/requestException";
 import { ApiResult } from "Models/apiResult";
 import Cookies from "cookies-ts"

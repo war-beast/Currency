@@ -5,7 +5,7 @@ import ApiRequest from "Util/request";
 import Cookies from "cookies-ts";
 
 @Component
-export class ProfileWidget extends Vue {
+export default class ProfileWidget extends Vue {
 	private readonly apiRequest: ApiRequest;
 
 	@Action("logUserOut", { namespace: globalProfileNamespace }) logUserOut: any;

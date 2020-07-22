@@ -30,6 +30,7 @@
     <None Remove="Src\pages\login\init.ts" />
     <None Remove="Src\pages\main\init.ts" />
     <None Remove="Src\pages\register\init.ts" />
+    <None Remove="Src\pages\shared\profileWidget.ts" />
     <None Remove="Src\util\request.ts" />
   </ItemGroup>
 
@@ -71,6 +72,7 @@
     <TypeScriptCompile Include="Src\pages\main\init.ts" />
     <TypeScriptCompile Include="Src\pages\register\init.ts" />
     <TypeScriptCompile Include="Src\interfaces\profile\types.ts" />
+    <TypeScriptCompile Include="Src\pages\shared\profileWidget.ts" />
     <TypeScriptCompile Include="Src\util\request.ts" />
   </ItemGroup>
 
