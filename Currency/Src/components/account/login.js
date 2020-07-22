@@ -18,9 +18,8 @@ import Component from "vue-class-component";
 import ApiRequest from "Util/request";
 import { LoginModel } from "Models/account";
 import Cookies from "cookies-ts";
-import { State, Action, Getter } from "vuex-class";
+import { Action, Getter } from "vuex-class";
 import { User } from "Models/account";
-const namespace = "profile";
 const loginUrl = "/api/account/token";
 let LoginComponent = class LoginComponent extends Vue {
     constructor() {
@@ -62,16 +61,13 @@ let LoginComponent = class LoginComponent extends Vue {
     }
 };
 __decorate([
-    State("profile")
-], LoginComponent.prototype, "profile", void 0);
-__decorate([
-    Action("logUserIn", { namespace: namespace })
+    Action("logUserIn", { namespace: globalProfileNamespace })
 ], LoginComponent.prototype, "logUserIn", void 0);
 __decorate([
-    Getter("userEmail", { namespace: namespace })
+    Getter("userEmail", { namespace: globalProfileNamespace })
 ], LoginComponent.prototype, "userEmail", void 0);
 __decorate([
-    Getter("isLogged", { namespace: namespace })
+    Getter("isLogged", { namespace: globalProfileNamespace })
 ], LoginComponent.prototype, "isLogged", void 0);
 LoginComponent = __decorate([
     Component

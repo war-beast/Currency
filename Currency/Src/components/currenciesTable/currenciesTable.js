@@ -20,7 +20,6 @@ import { Action } from "vuex-class";
 const currenciesListUrl = "/api/common/currencies";
 const currenciesTotalCountUrl = "/api/common/currencyCount";
 const currencyDetails = "/api/common/currency";
-const namespace = "profile";
 let CurrenciesTable = class CurrenciesTable extends Vue {
     constructor() {
         super();
@@ -102,7 +101,7 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
     }
 };
 __decorate([
-    Action("logUserOut", { namespace: namespace })
+    Action("logUserOut", { namespace: globalProfileNamespace })
 ], CurrenciesTable.prototype, "logUserOut", void 0);
 CurrenciesTable = __decorate([
     Component({

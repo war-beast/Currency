@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Remove="Src\components\account\login.ts" />
+    <None Remove="Src\components\account\profileWidget.ts" />
     <None Remove="Src\components\account\register.ts" />
     <None Remove="Src\components\currenciesTable\currenciesTable.ts" />
     <None Remove="Src\components\currenciesTable\currenciesTableRow.ts" />
@@ -53,6 +54,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="Src\components\account\login.ts" />
+    <TypeScriptCompile Include="Src\components\account\profileWidget.ts" />
     <TypeScriptCompile Include="Src\components\account\register.ts" />
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTable.ts" />
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTableRow.ts" />

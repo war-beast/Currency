@@ -8,7 +8,6 @@ import { Action } from "vuex-class";
 const currenciesListUrl = "/api/common/currencies";
 const currenciesTotalCountUrl = "/api/common/currencyCount";
 const currencyDetails = "/api/common/currency";
-const namespace = "profile";
 
 @Component({
 	components: {
@@ -37,7 +36,7 @@ export default class CurrenciesTable extends Vue {
 		}, 0);
 	}
 
-	@Action("logUserOut", { namespace: namespace }) logUserOut: any;
+	@Action("logUserOut", { namespace: globalProfileNamespace }) logUserOut: any;
 
 	public showPrevious() {
 		if (this.page > 1)

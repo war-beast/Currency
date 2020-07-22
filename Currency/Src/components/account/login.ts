@@ -4,11 +4,9 @@ import ApiRequest from "Util/request";
 import { ApiResult } from "Models/apiResult";
 import { LoginModel, TokenResult } from "Models/account";
 import Cookies from "cookies-ts";
-import { State, Action, Getter } from "vuex-class";
-import { IProfileState } from "Interfaces/profile/types";
+import { Action, Getter } from "vuex-class";
 import { User } from "Models/account";
 
-const namespace = "profile";
 const loginUrl = "/api/account/token";
 
 @Component
@@ -27,10 +25,9 @@ export default class LoginComponent extends Vue {
 		this.apiRequest = new ApiRequest();
 	}
 
-	@State("profile") profile: IProfileState;
-	@Action("logUserIn", { namespace: namespace }) logUserIn: any;
-	@Getter("userEmail", { namespace: namespace }) userEmail: string;
-	@Getter("isLogged", { namespace: namespace }) isLogged: boolean;
+	@Action("logUserIn", { namespace: globalProfileNamespace }) logUserIn: any;
+	@Getter("userEmail", { namespace: globalProfileNamespace }) userEmail: string;
+	@Getter("isLogged", { namespace: globalProfileNamespace }) isLogged: boolean;
 
 	private async logIn() {
 		this.loginError = "";
