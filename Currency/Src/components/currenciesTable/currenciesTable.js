@@ -16,9 +16,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { Vue, Component } from "vue-property-decorator";
 import RowComponent from "Components/currenciesTable/currenciesTableRow.vue";
 import ApiRequest from "Util/request";
+import { Getter } from "vuex-class";
 const currenciesListUrl = "/api/common/currencies";
 const currenciesTotalCountUrl = "/api/common/currencyCount";
 const currencyDetails = "/api/common/currency";
+const namespace = "profile";
 let CurrenciesTable = class CurrenciesTable extends Vue {
     constructor() {
         super();
@@ -94,6 +96,12 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
         });
     }
 };
+__decorate([
+    Getter("userEmail", { namespace: namespace })
+], CurrenciesTable.prototype, "userEmail", void 0);
+__decorate([
+    Getter("isLogged", { namespace: namespace })
+], CurrenciesTable.prototype, "isLogged", void 0);
 CurrenciesTable = __decorate([
     Component({
         components: {

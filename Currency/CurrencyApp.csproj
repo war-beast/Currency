@@ -72,4 +72,8 @@
     <TypeScriptCompile Include="Src\util\request.ts" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\bundle\" />
+  </ItemGroup>
+
 </Project>

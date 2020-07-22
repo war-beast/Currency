@@ -2,6 +2,7 @@
 import Vuex, { StoreOptions } from "vuex";
 import { IRootState } from "Interfaces/profile/types";
 import { profile } from "Modules/profile/index";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -11,7 +12,8 @@ const store: StoreOptions<IRootState> = {
 	},
 	modules: {
 		profile
-	}
+	},
+	plugins: [createPersistedState()]
 };
 
 export default new Vuex.Store<IRootState>(store);

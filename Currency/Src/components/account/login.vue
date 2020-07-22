@@ -1,6 +1,6 @@
 ﻿<template>
 	<div class="row">
-		<section v-if="!userLogged">
+		<section v-if="!isLogged">
 			<form v-bind:class="{ 'was-validated': !formValid }">
 				<h4>Введите данные учётной записи для входа.</h4>
 				<hr />

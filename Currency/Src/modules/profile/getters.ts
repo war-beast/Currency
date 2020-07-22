@@ -6,5 +6,9 @@ export const getters: GetterTree<IProfileState, IRootState> = {
 		const { user } = state;
 		const email = (user && user.email) || null;
 		return email;
+	},
+	isLogged(state): boolean {
+		const { user } = state;
+		return (user && user.email !== "" && user.email !== undefined) || false;
 	}
 };
