@@ -3,10 +3,12 @@ import RowComponent from "Components/currenciesTable/currenciesTableRow.vue";
 import { Currency } from "Models/currency";
 import { ApiResult } from "Models/apiResult";
 import ApiRequest from "Util/request";
+import { Action } from "vuex-class";
 
 const currenciesListUrl = "/api/common/currencies";
 const currenciesTotalCountUrl = "/api/common/currencyCount";
 const currencyDetails = "/api/common/currency";
+const namespace = "profile";
 
 @Component({
 	components: {
@@ -35,6 +37,8 @@ export default class CurrenciesTable extends Vue {
 		}, 0);
 	}
 
+	@Action("logUserOut", { namespace: namespace }) logUserOut: any;
+
 	public showPrevious() {
 		if (this.page > 1)
 			this.loadData(--this.page, this.visibleRowCount);
@@ -54,10 +58,16 @@ export default class CurrenciesTable extends Vue {
 				} else {
 					console.log(`Ошибка загрузки данных по url: ${currencyDetails}`);
 
-					if (result.value.indexOf("401") !== -1)
-						this.isUserAuthorized = false;
+					this.logOut(result.value);
 				}
 			});
+	}
+
+	private logOut(authorizationResultError: string): void {
+		if (authorizationResultError.indexOf("401") !== -1) {
+			this.isUserAuthorized = false;
+			this.logUserOut();
+		}
 	}
 
 	private hideInfoModal(): void {
@@ -73,8 +83,7 @@ export default class CurrenciesTable extends Vue {
 				} else {
 					console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
 
-					if (result.value.indexOf("401") !== -1)
-						this.isUserAuthorized = false;
+					this.logOut(result.value);
 				}
 			});
 	}
@@ -87,6 +96,7 @@ export default class CurrenciesTable extends Vue {
 					this.pageCount = Math.ceil(this.totalCount / this.visibleRowCount);
 				} else {
 					console.log(`Ошибка загрузки данных по url: ${currenciesListUrl}`);
+					this.logOut(result.value);
 				}
 			});
 	}

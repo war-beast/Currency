@@ -19,6 +19,7 @@ import ApiRequest from "Util/request";
 import { LoginModel } from "Models/account";
 import Cookies from "cookies-ts";
 import { State, Action, Getter } from "vuex-class";
+import { User } from "Models/account";
 const namespace = "profile";
 const loginUrl = "/api/account/token";
 let LoginComponent = class LoginComponent extends Vue {
@@ -46,9 +47,7 @@ let LoginComponent = class LoginComponent extends Vue {
                     const cookies = new Cookies();
                     const apiResponse = (result.value);
                     cookies.set(globalAccessToken, apiResponse.access_token, { expires: "100d" });
-                    const user = {
-                        email: apiResponse.username
-                    };
+                    const user = new User(apiResponse.username);
                     this.logUserIn(user);
                 }
                 else {
