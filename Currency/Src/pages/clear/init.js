@@ -1,5 +1,5 @@
 import Vue from "vue";
-import RegisterComponent from "Components/account/register.vue";
+import ClearPageComponent from "Components/clearPage/page.vue";
 import BasePage from "Pages/basePage";
 class AppCore extends BasePage {
     constructor() {
@@ -8,8 +8,8 @@ class AppCore extends BasePage {
     }
     init() {
         this.instance = new Vue({
-            el: "#vue-account-container",
-            render: (h) => h(RegisterComponent),
+            el: "#vue-app-container",
+            render: (h) => h(ClearPageComponent),
             store: this.store
         });
     }

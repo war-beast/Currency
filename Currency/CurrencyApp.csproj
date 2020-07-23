@@ -15,6 +15,7 @@
     <None Remove="Src\components\account\login.ts" />
     <None Remove="Src\components\account\profileWidget.ts" />
     <None Remove="Src\components\account\register.ts" />
+    <None Remove="Src\components\clearPage\page.ts" />
     <None Remove="Src\components\currenciesTable\currenciesTable.ts" />
     <None Remove="Src\components\currenciesTable\currenciesTableRow.ts" />
     <None Remove="Src\exceptions\invalidArgumentException.ts" />
@@ -28,6 +29,7 @@
     <None Remove="Src\modules\profile\index.ts" />
     <None Remove="Src\modules\profile\mutations.ts" />
     <None Remove="Src\pages\basePage.ts" />
+    <None Remove="Src\pages\clear.ts" />
     <None Remove="Src\pages\login\init.ts" />
     <None Remove="Src\pages\main\init.ts" />
     <None Remove="Src\pages\register\init.ts" />
@@ -58,6 +60,7 @@
     <TypeScriptCompile Include="Src\components\account\login.ts" />
     <TypeScriptCompile Include="Src\components\account\profileWidget.ts" />
     <TypeScriptCompile Include="Src\components\account\register.ts" />
+    <TypeScriptCompile Include="Src\components\clearPage\page.ts" />
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTable.ts" />
     <TypeScriptCompile Include="Src\components\currenciesTable\currenciesTableRow.ts" />
     <TypeScriptCompile Include="Src\exceptions\invalidArgumentException.ts" />
@@ -70,6 +73,7 @@
     <TypeScriptCompile Include="Src\modules\profile\index.ts" />
     <TypeScriptCompile Include="Src\modules\profile\mutations.ts" />
     <TypeScriptCompile Include="Src\pages\basePage.ts" />
+    <TypeScriptCompile Include="Src\pages\clear\init.ts" />
     <TypeScriptCompile Include="Src\pages\login\init.ts" />
     <TypeScriptCompile Include="Src\pages\main\init.ts" />
     <TypeScriptCompile Include="Src\pages\register\init.ts" />

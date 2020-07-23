@@ -14,8 +14,8 @@ let configuration = {
 	entry: {
 		mainPage: "./Src/pages/main/init.js",
 		loginPage: "./Src/pages/login/init.js",
-		registerPage: "./Src/pages/register/init.js"
-		//profileWidget: "./Src/pages/shared/profileWidget.js"
+		registerPage: "./Src/pages/register/init.js",
+		clearPage: "./Src/pages/clear/init.js"
 	},
 	output: {
 		filename: "[name].bundle.js",
