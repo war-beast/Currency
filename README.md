@@ -30,6 +30,7 @@
 2. Адреса методов API чуть изменены, добавлен префикс /api. Т.е. вместо /currencies нужно использовать /api/currencies
 3. Клиентская часть реализована на VueJS, Vuex и TypeScript.
 4. Добавлен API авторизации:
+
     4.1 Получение токена авторизации: /api/account/token
     4.2 Выход: /api/account/logout
     4.3 Регистрация: /api/account/register
