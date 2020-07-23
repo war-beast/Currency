@@ -1,9 +1,20 @@
 ﻿import Vue from "vue";
 import LoginComponent from "Components/account/login.vue";
-import store from "Modules/store";
+import BasePage from "Pages/basePage";
 
-new Vue({
-	el: "#vue-account-container",
-	render: (h: any) => h(LoginComponent),
-	store
-});
+class AppCore extends BasePage {
+	constructor() {
+		super();
+		this.init();
+	}
+
+	private init() {
+		this.instance = new Vue({
+			el: "#vue-account-container",
+			render: (h: any) => h(LoginComponent),
+			store: this.store
+		});
+	}
+}
+
+new AppCore();

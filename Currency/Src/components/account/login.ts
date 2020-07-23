@@ -6,10 +6,15 @@ import { LoginModel, TokenResult } from "Models/account";
 import Cookies from "cookies-ts";
 import { Action, Getter } from "vuex-class";
 import { User } from "Models/account";
+import ProfileWidget from "Components/account/profileWidget.vue";
 
 const loginUrl = "/api/account/token";
 
-@Component
+@Component({
+	components: {
+		"profile-widget": ProfileWidget
+	}
+})
 export default class LoginComponent extends Vue {
 	private email: string = "";
 	private password: string = "";

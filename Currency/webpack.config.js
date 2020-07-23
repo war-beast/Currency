@@ -15,7 +15,7 @@ let configuration = {
 		mainPage: "./Src/pages/main/init.js",
 		loginPage: "./Src/pages/login/init.js",
 		registerPage: "./Src/pages/register/init.js",
-		profileWidget: "./Src/pages/shared/profileWidget.js"
+		clearPage: "./Src/pages/clear/init.js"
 	},
 	output: {
 		filename: "[name].bundle.js",
@@ -56,6 +56,7 @@ let configuration = {
 			vue$: "vue/dist/vue.esm.js",
 			Vue$: "vue/dist/vue.esm.js",
 
+			Pages: path.resolve(__dirname, "./Src/pages/"),
 			Main: path.resolve(__dirname, "./Src/pages/main/"),
 			Components: path.resolve(__dirname, "./Src/components/"),
 			Models: path.resolve(__dirname, "./Src/models/"),

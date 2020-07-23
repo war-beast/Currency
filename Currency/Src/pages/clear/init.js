@@ -1,5 +1,5 @@
 import Vue from "vue";
-import TableComponent from "Components/currenciesTable/currenciesTable.vue";
+import ClearPageComponent from "Components/clearPage/page.vue";
 import BasePage from "Pages/basePage";
 class AppCore extends BasePage {
     constructor() {
@@ -9,7 +9,7 @@ class AppCore extends BasePage {
     init() {
         this.instance = new Vue({
             el: "#vue-app-container",
-            render: (h) => h(TableComponent),
+            render: (h) => h(ClearPageComponent),
             store: this.store
         });
     }

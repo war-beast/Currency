@@ -1,17 +1,18 @@
 ﻿import Vue from "vue";
 import RegisterComponent from "Components/account/register.vue";
+import BasePage from "Pages/basePage";
 
-class AppCore {
-	private instance: Vue;
-
+class AppCore extends BasePage {
 	constructor() {
+		super();
 		this.init();
 	}
 
 	private init() {
 		this.instance = new Vue({
 			el: "#vue-account-container",
-			render: (h: any) => h(RegisterComponent)
+			render: (h: any) => h(RegisterComponent),
+			store: this.store
 		});
 	}
 }
