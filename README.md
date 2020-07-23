@@ -32,5 +32,7 @@
 4. Добавлен API авторизации:
 
     4.1 Получение токена авторизации: /api/account/token
+    
     4.2 Выход: /api/account/logout
+    
     4.3 Регистрация: /api/account/register
