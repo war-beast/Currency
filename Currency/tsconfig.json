@@ -15,7 +15,8 @@
 			"Exceptions/*": [ "exceptions/*" ],
 			"Util/*": [ "util/*" ],
 			"Interfaces/*": [ "interfaces/*" ],
-			"Modules/*": [ "modules/*" ]
+			"Modules/*": [ "modules/*" ],
+			"Pages/*":  ["pages/*"] 
 		}
 	},
 	"exclude": [

@@ -1,11 +1,10 @@
 ﻿import Vue from "vue";
 import TableComponent from "Components/currenciesTable/currenciesTable.vue";
-import store from "Modules/store";
+import BasePage from "Pages/basePage";
 
-class AppCore {
-	private instance: Vue;
-
+class AppCore extends BasePage {
 	constructor() {
+		super();
 		this.init();
 	}
 
@@ -13,7 +12,7 @@ class AppCore {
 		this.instance = new Vue({
 			el: "#vue-app-container",
 			render: (h: any) => h(TableComponent),
-			store
+			store: this.store
 		});
 	}
 }

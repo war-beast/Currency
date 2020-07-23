@@ -20,6 +20,7 @@ import { LoginModel } from "Models/account";
 import Cookies from "cookies-ts";
 import { Action, Getter } from "vuex-class";
 import { User } from "Models/account";
+import ProfileWidget from "Components/account/profileWidget.vue";
 const loginUrl = "/api/account/token";
 let LoginComponent = class LoginComponent extends Vue {
     constructor() {
@@ -70,7 +71,11 @@ __decorate([
     Getter("isLogged", { namespace: globalProfileNamespace })
 ], LoginComponent.prototype, "isLogged", void 0);
 LoginComponent = __decorate([
-    Component
+    Component({
+        components: {
+            "profile-widget": ProfileWidget
+        }
+    })
 ], LoginComponent);
 export default LoginComponent;
 //# sourceMappingURL=login.js.map

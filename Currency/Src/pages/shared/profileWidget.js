@@ -1,17 +1,15 @@
 import Vue from "vue";
 import ProfileWidget from "Components/account/profileWidget.vue";
-import store from "Modules/store";
-class App {
-    constructor() {
-        this.init();
+export default class Profile {
+    constructor(store) {
+        this.init(store);
     }
-    init() {
+    init(store) {
         this.instance = new Vue({
             el: "#vue-profile-widget",
             render: (h) => h(ProfileWidget),
-            store
+            store: store
         });
     }
 }
-new App();
 //# sourceMappingURL=profileWidget.js.map

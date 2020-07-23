@@ -1,21 +1,18 @@
 ﻿import Vue from "vue";
 import ProfileWidget from "Components/account/profileWidget.vue";
-import store from "Modules/store";
 
-class App {
-	private instance: Vue;
+export default class Profile {
+	protected instance: Vue;
 
-	constructor() {
-		this.init();
+	constructor(store: any) {
+		this.init(store);
 	}
 
-	private init() {
+	private init(store: any) {
 		this.instance = new Vue({
 			el: "#vue-profile-widget",
 			render: (h: any) => h(ProfileWidget),
-			store
+			store: store
 		});
 	}
 }
-
-new App();

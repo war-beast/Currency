@@ -10,6 +10,7 @@ const logoutUrl = "/api/account/logout";
 @Component
 export default class ProfileWidget extends Vue {
 	private readonly apiRequest: ApiRequest;
+	private name: string = "profile-widget";
 
 	constructor() {
 		super();
