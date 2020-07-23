@@ -31,14 +31,17 @@ namespace CurrencyApp.Console
 				else
 				{
 					System.Console.WriteLine("Введена не правильная команда.");
+					System.Console.WriteLine(" ");
 				}
 			}
 		}
 
 		private static void RegisterServices()
 		{
-			var config = new MapperConfiguration(cfg => { cfg.AddProfile(new MappingProfiles()); });
-
+			var config = new MapperConfiguration(cfg =>
+			{
+				cfg.AddProfile(new MappingProfiles());
+			});
 			IMapper mapper = config.CreateMapper();
 
 			var services = new ServiceCollection()
