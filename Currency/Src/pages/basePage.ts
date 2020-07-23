@@ -10,6 +10,8 @@ export default class BasePage {
 	constructor() {
 		this.store = Store;
 		setTimeout(() => {
+			//аналогичным образом инициализируются все компоненты, 
+			//которые рендерятся вне основного приложения
 			this.initProfile();
 		}, 0);
 	}

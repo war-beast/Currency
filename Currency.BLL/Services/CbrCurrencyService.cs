@@ -24,7 +24,7 @@ namespace CurrencyApp.BLL.Services
 
 		public CbrCurrencyService(IUnitOfWork unitOfWork,
 			IMapper mapper,
-			ICbrCurrencyParsingService currencyParsingService, 
+			ICbrCurrencyParsingService currencyParsingService,
 			IDailyRatesService dailyRatesService) : base(unitOfWork)
 		{
 			_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -35,8 +35,12 @@ namespace CurrencyApp.BLL.Services
 
 		#endregion
 
-		public async Task<CurrencyDto> Get(string id) =>
-			await Task.Run(() => _mapper.Map<CurrencyDto>(_unitOfWork.Currencies.Get(id)));
+		public async Task<CurrencyDto> Get(string id)
+		{
+			var currency = await Task.Run(() => _mapper.Map<CurrencyDto>(_unitOfWork.Currencies.Get(id)));
+			currency.DayRates = currency.DayRates.OrderByDescending(x => x.Date);
+			return currency;
+		}
 
 		public async Task<IEnumerable<CurrencyDto>> GetCurrencies(int page = 1, int pageSize = 5) =>
 			await Task.Run(() => _mapper.Map<IEnumerable<CurrencyDto>>(
@@ -68,7 +72,7 @@ namespace CurrencyApp.BLL.Services
 				{
 					_unitOfWork.Currencies.Update(_mapper.Map<Currency>(currency));
 				}
-				
+
 			}
 
 			//Если со дня предыдущего обновления курсов прошло несколько дней,

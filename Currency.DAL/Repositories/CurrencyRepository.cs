@@ -34,8 +34,7 @@ namespace CurrencyApp.DAL.Repositories
 
 		public IEnumerable<Currency> GetAll()
 		{
-			return _db.Currencies
-				.Include(x => x.DayRates);
+			return _db.Currencies;
 		}
 
 		public void Create(Currency item)
