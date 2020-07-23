@@ -111,7 +111,6 @@ namespace CurrencyApp
 
 			app.UseRouting();
 
-			app.UseJwtCookie();
 			app.UseAuthentication();
 			app.UseAuthorization();
 
