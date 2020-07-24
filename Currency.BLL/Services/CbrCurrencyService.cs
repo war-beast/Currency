@@ -58,9 +58,9 @@ namespace CurrencyApp.BLL.Services
 		{
 			//Получаем фид, с обязательным указанием сегодняшней даты
 			//т.к. после 14:00 фид показывает курсы на следующий день
-			var currencies = await _currencyParsingService.GetParsed(DateTime.Today);
+			var currencyRates = await _currencyParsingService.GetParsed(DateTime.Today);
 
-			foreach (var currency in currencies.Currencies)
+			foreach (var currency in currencyRates.Currencies)
 			{
 				var existCurrency = _unitOfWork.Currencies.Get(currency.Id);
 
@@ -75,46 +75,9 @@ namespace CurrencyApp.BLL.Services
 
 			}
 
-			//Если со дня предыдущего обновления курсов прошло несколько дней,
-			//нужно заполнить историю всеми данными о курсах до текущего дня.
-			var lastUpdateDate = await GetLastUpdateDate();
-
-			var date = lastUpdateDate.AddDays(1);
-			while (date <= DateTime.Today)
-			{
-				_dailyRatesService.AddToHistory(currencies.Currencies, date);
-				date = date.AddDays(1);
-			}
+			await _dailyRatesService.UpdateHistory(currencyRates.Currencies);
 
 			await _unitOfWork.Save();
 		}
-
-		#region private methods
-
-		private async Task<DateTime> GetLastUpdateDate()
-		{
-			var lastRates = await Task.Run(() => _unitOfWork
-				.Currencies
-				.GetAll()
-				.Select(x => x.DayRates.OrderByDescending(y => y.Date)
-					.FirstOrDefault())
-				.Where(x => x != null)
-				.ToList());
-
-			if (lastRates.Any())
-			{
-				//Ориентируемся по самой последней дате.
-				//Если какая-то валюта перестала обновляться, значит валюта стала не актуальной (удалена из списков валют).
-				return lastRates
-					.Select(x => x.Date)
-					.Max();
-			}
-			else
-			{
-				return DateTime.Today;
-			}
-		}
-
-		#endregion
 	}
 }

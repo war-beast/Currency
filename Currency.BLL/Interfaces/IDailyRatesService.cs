@@ -7,10 +7,9 @@ namespace CurrencyApp.BLL.Interfaces
 	public interface IDailyRatesService
 	{
 		/// <summary>
-		/// Добавление курсов валют на указанные день
+		/// Обновление истории курсов валют
 		/// </summary>
-		/// <param name="currencies">Курсы валют</param>
-		/// <param name="checkingDate">Дата курса</param>
-		void AddToHistory(IEnumerable<ICurrencyRate> currencies, DateTime checkingDate);
+		/// <param name="currencies">Список валют</param>
+		Task UpdateHistory(IEnumerable<ICurrencyRate> currencies);
 	}
 }

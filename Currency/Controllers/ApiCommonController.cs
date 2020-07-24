@@ -30,8 +30,15 @@ namespace CurrencyApp.Controllers
 
 		#endregion
 
+		/// <summary>
+		/// Этот метод добавлен для простоты обновления данных
+		/// Если хочется оставить его в релизе, то нужно выполнять дополнительную проверку пользователя на соответствие уровня доступа
+		/// Например сделать этот метод доступным только для роли "Администратор".
+		/// </summary>
+		/// <returns></returns>
 		[HttpGet]
 		[Route("update")]
+		[AllowAnonymous]
 		public async Task<IActionResult> UpdateCurrencies()
 		{
 			await _cbrCurrencyService.CreateOrUpdate();
