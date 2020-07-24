@@ -28,6 +28,7 @@
     <None Remove="Src\modules\profile\getters.ts" />
     <None Remove="Src\modules\profile\index.ts" />
     <None Remove="Src\modules\profile\mutations.ts" />
+    <None Remove="Src\modules\profile\types.ts" />
     <None Remove="Src\pages\basePage.ts" />
     <None Remove="Src\pages\clear.ts" />
     <None Remove="Src\pages\login\init.ts" />
@@ -72,6 +73,7 @@
     <TypeScriptCompile Include="Src\modules\profile\getters.ts" />
     <TypeScriptCompile Include="Src\modules\profile\index.ts" />
     <TypeScriptCompile Include="Src\modules\profile\mutations.ts" />
+    <TypeScriptCompile Include="Src\modules\profile\types.ts" />
     <TypeScriptCompile Include="Src\pages\basePage.ts" />
     <TypeScriptCompile Include="Src\pages\clear\init.ts" />
     <TypeScriptCompile Include="Src\pages\login\init.ts" />
