@@ -46,7 +46,7 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
     }
     showDetails(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.apiRequest.getData(`${currencyDetails}?id=${id}`)
+            yield this.apiRequest.getData(`${currencyDetails}/${id}`)
                 .then((result) => {
                 if (result.success) {
                     this.selectedCurrency = JSON.parse(result.value);
@@ -70,7 +70,7 @@ let CurrenciesTable = class CurrenciesTable extends Vue {
     }
     loadData(page, pageSize) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.apiRequest.getData(`${currenciesListUrl}?page=${page}&pageSize=${pageSize}`)
+            yield this.apiRequest.getData(`${currenciesListUrl}/${pageSize}/${page}`)
                 .then((result) => {
                 if (result.success) {
                     this.currencies = JSON.parse(result.value);

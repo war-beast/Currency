@@ -52,11 +52,11 @@ namespace CurrencyApp.Controllers
 		}
 
 		[HttpGet]
-		[Route("currencies")]
-		[ResponseCache(VaryByQueryKeys = new[] { "page", "pageSize" }, Duration = 300, Location = ResponseCacheLocation.Any)]
-		public async Task<IActionResult> GetCurrencies(int page = 1, int pageSize = 5)
+		[Route("currencies/{pageSize}/{tablePage}")]
+		[ResponseCache(VaryByQueryKeys = new[] { "pageSize", "tablePage"}, Duration = 300, Location = ResponseCacheLocation.Any)]
+		public async Task<IActionResult> GetCurrencies(int pageSize = 5, int tablePage = 1)
 		{
-			var result = await _cbrCurrencyService.GetCurrencies(page, pageSize);
+			var result = await _cbrCurrencyService.GetCurrencies(tablePage, pageSize);
 
 			return Ok(JsonConvert.SerializeObject(result, Formatting.None, new JsonSerializerSettings
 			{
@@ -66,7 +66,7 @@ namespace CurrencyApp.Controllers
 		}
 
 		[HttpGet]
-		[Route("currency")]
+		[Route("currency/{id?}")]
 		[ResponseCache(VaryByQueryKeys = new[] { "id" }, Duration = 300, Location = ResponseCacheLocation.Any)]
 		public async Task<IActionResult> GetCurrencyDetails(string id)
 		{

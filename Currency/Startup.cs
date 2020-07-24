@@ -117,11 +117,6 @@ namespace CurrencyApp
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
-					name: "apiCommon",
-					template: "api/common/currency/{id?}",
-					defaults: new { controller = "Api", action = "Index" });
-
-				routes.MapRoute(
 					name: "default",
 					template: "{controller=Home}/{action=Index}/{id?}");
 			});

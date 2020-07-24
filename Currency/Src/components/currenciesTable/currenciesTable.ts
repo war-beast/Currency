@@ -49,7 +49,7 @@ export default class CurrenciesTable extends Vue {
 	}
 
 	public async showDetails(id: string) {
-		await this.apiRequest.getData(`${currencyDetails}?id=${id}`)
+		await this.apiRequest.getData(`${currencyDetails}/${id}`)
 			.then((result: ApiResult) => {
 				if (result.success) {
 					this.selectedCurrency = JSON.parse(result.value);
@@ -74,7 +74,7 @@ export default class CurrenciesTable extends Vue {
 	}
 
 	private async loadData(page: number, pageSize: number) {
-		await this.apiRequest.getData(`${currenciesListUrl}?page=${page}&pageSize=${pageSize}`)
+		await this.apiRequest.getData(`${currenciesListUrl}/${pageSize}/${page}`)
 			.then((result: ApiResult) => {
 				if (result.success) {
 					this.currencies = JSON.parse(result.value);
