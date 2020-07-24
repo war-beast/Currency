@@ -24,9 +24,10 @@ namespace CurrencyApp.Console
 			{
 				System.Console.WriteLine("Введите команду обновления курсов");
 				var command = System.Console.ReadLine() ?? string.Empty;
-				if (command.Equals("update"))
+				if (command.ToUpper().Equals("UPDATE"))
 				{
 					await _cbrCurrencyService.CreateOrUpdate();
+					System.Console.WriteLine("Курс валют обновлён.");
 				}
 				else
 				{
