@@ -1,5 +1,5 @@
 ﻿<template>
-	<div class="container-fluid">
+	<div class="container-fluid" v-bind:class="{ 'modal-open': isInfoVisible }">
 		<div class="row d-flex flex-wrap justify-content-between align-items-center my-4" v-if="isLogged">
 			<div>
 				Всего: {{totalCount}} записей

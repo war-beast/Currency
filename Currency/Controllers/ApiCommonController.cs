@@ -12,7 +12,6 @@ namespace CurrencyApp.Controllers
 {
 	[Route("api/common")]
 	[ApiController]
-	[Authorize]
 	public class ApiCommonController : ControllerBase
 	{
 		#region private members
